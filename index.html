@@ -7,134 +7,92 @@
 <meta name="description" content="Data scientist bridging electronic engineering and applied data science, specializing in semiconductor data analysis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e1116;
-    --panel: #161b22;
-    --line: #232a34;
-    --ink: #e7ecf2;
-    --muted: #8b97a6;
-    --dim: #5c6675;
-    --accent: #4db6ac;
-    --accent-soft: rgba(77,182,172,0.12);
-    --grid: rgba(77,182,172,0.06);
-    --display: "Fraunces", Georgia, serif;
-    --sans: "IBM Plex Sans", system-ui, sans-serif;
-    --mono: "IBM Plex Mono", monospace;
+    --paper: #faf8f4;
+    --panel: #ffffff;
+    --ink: #1a1c1e;
+    --sub: #4a4e54;
+    --muted: #7c8189;
+    --line: #dcd7cd;
+    --line-strong: #1a1c1e;
+    --accent: #b23a2e;
+    --accent-ink: #8a2c22;
+    --display: "Newsreader", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+    --mono: "Space Mono", monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
   body {
-    background: var(--bg);
+    background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
-    line-height: 1.6;
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-
-  /* ---- nav ---- */
-  nav {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(14,17,22,0.82);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-  .brand { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.02em; color: var(--ink); }
-  .brand span { color: var(--accent); }
-  .navlinks { display: flex; gap: 26px; font-size: 0.82rem; color: var(--muted); font-family: var(--mono); }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+  nav { position: sticky; top: 0; z-index: 20; background: rgba(250,248,244,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; }
+  .brand b { color: var(--accent); }
+  .navlinks { display: flex; gap: 28px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
   .navlinks a:hover { color: var(--accent); }
-  @media (max-width: 640px) { .navlinks { display: none; } }
-
-  /* ---- hero ---- */
-  header {
-    position: relative;
-    padding: 108px 0 76px;
-    border-bottom: 1px solid var(--line);
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 44px 44px;
-  }
-  .eyebrow {
-    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 22px;
-  }
-  h1 {
-    font-family: var(--display); font-weight: 500;
-    font-size: clamp(2.5rem, 6vw, 4.4rem); line-height: 1.04;
-    letter-spacing: -0.015em; margin-bottom: 24px;
-  }
-  h1 em { font-style: italic; color: var(--accent); }
-  .lede { font-size: clamp(1.02rem, 2vw, 1.22rem); color: var(--muted); max-width: 620px; margin-bottom: 34px; }
-  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    font-family: var(--mono); font-size: 0.85rem; padding: 11px 20px;
-    border: 1px solid var(--line); border-radius: 2px; color: var(--ink);
-    transition: all 0.18s ease;
-  }
-  .btn.primary { background: var(--accent); color: #06201d; border-color: var(--accent); font-weight: 500; }
-  .btn.primary:hover { background: #5fc8bd; }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.primary:hover { color: #06201d; }
-
-  /* ---- section ---- */
-  section { padding: 80px 0; border-bottom: 1px solid var(--line); }
-  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 46px; }
-  .sec-num { font-family: var(--mono); font-size: 0.8rem; color: var(--dim); }
-  .sec-title { font-family: var(--display); font-weight: 500; font-size: 1.9rem; letter-spacing: -0.01em; }
-
-  /* ---- about ---- */
-  .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 34px; } }
-  .about-grid p { color: var(--muted); margin-bottom: 18px; }
-  .about-grid p strong { color: var(--ink); font-weight: 500; }
-  .facts { border-left: 1px solid var(--line); padding-left: 24px; }
-  .fact { margin-bottom: 22px; }
-  .fact .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
-  .fact .v { font-size: 0.94rem; color: var(--ink); }
-
-  /* ---- projects ---- */
-  .project {
-    display: grid; grid-template-columns: 88px 1fr; gap: 28px;
-    padding: 34px 0; border-top: 1px solid var(--line);
-  }
-  .project:first-of-type { border-top: none; }
-  @media (max-width: 640px) { .project { grid-template-columns: 1fr; gap: 14px; } }
-  .p-tag { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); padding-top: 6px; }
-  .p-title { font-family: var(--display); font-size: 1.4rem; font-weight: 500; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .p-sub { font-family: var(--mono); font-size: 0.8rem; color: var(--dim); margin-bottom: 16px; }
-  .p-body { color: var(--muted); margin-bottom: 18px; max-width: 640px; }
-  .p-metrics { display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 18px; }
-  .metric .n { font-family: var(--display); font-size: 1.5rem; color: var(--ink); }
-  .metric .l { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
-  .stack { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip {
-    font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
-    border: 1px solid var(--line); border-radius: 2px; padding: 4px 10px;
-    background: var(--panel);
-  }
-
-  /* ---- skills ---- */
-  .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  @media (max-width: 760px) { .skill-grid { grid-template-columns: 1fr; } }
-  .skill-card { border: 1px solid var(--line); border-radius: 3px; padding: 22px; background: var(--panel); }
-  .skill-card h4 { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-  .skill-card ul { list-style: none; font-size: 0.9rem; color: var(--muted); }
-  .skill-card li { padding: 3px 0; }
-
-  /* ---- contact ---- */
+  @media (max-width: 640px){ .navlinks{ display:none; } }
+  header { padding: 96px 0 60px; border-bottom: 1px solid var(--line-strong); }
+  .kicker { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px; }
+  .kicker::before { content: ""; width: 34px; height: 1px; background: var(--accent); display: inline-block; }
+  h1 { font-family: var(--display); font-weight: 500; font-size: clamp(2.5rem, 6vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 26px; }
+  h1 em { font-style: italic; }
+  .lede { font-size: clamp(1.02rem, 2vw, 1.2rem); color: var(--sub); max-width: 610px; margin-bottom: 34px; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { font-family: var(--mono); font-size: 0.8rem; padding: 11px 20px; border: 1px solid var(--line-strong); color: var(--ink); transition: all 0.16s ease; }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  section { padding: 74px 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: grid; grid-template-columns: 60px 1fr; gap: 20px; align-items: baseline; margin-bottom: 46px; }
+  .sec-num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); border-top: 2px solid var(--accent); padding-top: 8px; }
+  .sec-title { font-family: var(--display); font-weight: 500; font-size: 1.85rem; letter-spacing: -0.01em; }
+  .about-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 52px; }
+  @media (max-width: 760px){ .about-grid{ grid-template-columns:1fr; gap:34px; } }
+  .about-grid p { color: var(--sub); margin-bottom: 17px; }
+  .about-grid p strong { color: var(--ink); font-weight: 600; }
+  .spec { border: 1px solid var(--line); background: var(--panel); }
+  .spec-row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 0.86rem; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row .k { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .spec-row .v { color: var(--ink); font-weight: 500; text-align: right; }
+  .project { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 34px 0; border-top: 1px solid var(--line); }
+  .project:first-of-type { border-top: none; padding-top: 0; }
+  @media (max-width: 640px){ .project{ grid-template-columns:1fr; gap:12px; } }
+  .p-idx { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); }
+  .p-idx .big { display: block; font-family: var(--display); font-size: 2rem; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+  .p-title { font-family: var(--display); font-size: 1.42rem; font-weight: 500; margin-bottom: 5px; letter-spacing: -0.01em; }
+  .p-sub { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); margin-bottom: 15px; }
+  .p-body { color: var(--sub); margin-bottom: 18px; max-width: 630px; }
+  .p-metrics { display: flex; gap: 34px; flex-wrap: wrap; margin-bottom: 18px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .metric .n { font-family: var(--display); font-size: 1.55rem; color: var(--ink); }
+  .metric .l { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .stack { display: flex; gap: 7px; flex-wrap: wrap; }
+  .chip { font-family: var(--mono); font-size: 0.7rem; color: var(--sub); border: 1px solid var(--line); padding: 3px 9px; background: var(--panel); }
+  .skill-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--line); }
+  @media (max-width: 760px){ .skill-grid{ grid-template-columns:1fr; } }
+  .skill-card { padding: 24px; border-right: 1px solid var(--line); background: var(--panel); }
+  .skill-card:last-child { border-right: none; }
+  @media (max-width: 760px){ .skill-card{ border-right:none; border-bottom:1px solid var(--line);} .skill-card:last-child{border-bottom:none;} }
+  .skill-card h4 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .skill-card ul { list-style: none; font-size: 0.9rem; color: var(--sub); }
+  .skill-card li { padding: 4px 0; border-bottom: 1px dotted var(--line); }
+  .skill-card li:last-child { border-bottom: none; }
   #contact { border-bottom: none; }
-  .contact-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-  footer { padding: 34px 0; text-align: center; font-family: var(--mono); font-size: 0.76rem; color: var(--dim); border-top: 1px solid var(--line); }
-
-  /* reveal */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  footer { padding: 30px 0; text-align: center; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line-strong); }
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
   .reveal.in { opacity: 1; transform: none; }
 </style>
 </head>
@@ -142,7 +100,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="brand">jeonghwan<span>.son</span></div>
+    <div class="brand">JEONGHWAN <b>SON</b></div>
     <div class="navlinks">
       <a href="#about">about</a>
       <a href="#work">work</a>
@@ -154,12 +112,12 @@
 
 <header>
   <div class="wrap">
-    <div class="eyebrow">Data Scientist · Semiconductor Analytics</div>
+    <div class="kicker">Data Scientist · Semiconductor Analytics</div>
     <h1>Reading signal<br>from the <em>fab floor</em>.</h1>
     <p class="lede">I bridge electronic engineering and applied data science — turning noisy semiconductor and enterprise data into models people can defend, question, and act on.</p>
     <div class="cta-row">
       <a class="btn primary" href="#work">View projects</a>
-      <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">GitHub &#8599;</a>
     </div>
   </div>
 </header>
@@ -170,15 +128,15 @@
     <div class="about-grid">
       <div>
         <p>I'm a graduate of the <strong>M.S. Applied Data Science</strong> program at Syracuse University, with a B.S. in <strong>Electronic Engineering</strong> from Hanyang University in Seoul.</p>
-        <p>That combination shapes how I work. A defect map from a wafer line and a customer-ratings table from a data warehouse are both signal problems — but semiconductor data carries physics, process context, and failure modes that a generic pipeline misses. I build models that respect where the data comes from.</p>
+        <p>That combination shapes how I work. A defect map from a wafer line and a customer-ratings table from a data warehouse are both signal problems &mdash; but semiconductor data carries physics, process context, and failure modes that a generic pipeline misses. I build models that respect where the data comes from.</p>
         <p>I care about <strong>defensible results</strong>: qualifying a metric honestly, treating a low score as a diagnostic finding rather than hiding it, and validating claims against real data before they reach a slide.</p>
       </div>
-      <div class="facts">
-        <div class="fact"><div class="k">Degree</div><div class="v">M.S. Applied Data Science</div></div>
-        <div class="fact"><div class="k">GPA</div><div class="v">4.0 / 4.0</div></div>
-        <div class="fact"><div class="k">Foundation</div><div class="v">B.S. Electronic Engineering</div></div>
-        <div class="fact"><div class="k">Focus</div><div class="v">Semiconductor data analysis</div></div>
-        <div class="fact"><div class="k">Target</div><div class="v">Data Scientist / Data Engineer</div></div>
+      <div class="spec">
+        <div class="spec-row"><span class="k">Degree</span><span class="v">M.S. Applied Data Science</span></div>
+        <div class="spec-row"><span class="k">GPA</span><span class="v">4.0 / 4.0</span></div>
+        <div class="spec-row"><span class="k">Foundation</span><span class="v">B.S. Electronic Eng.</span></div>
+        <div class="spec-row"><span class="k">Focus</span><span class="v">Semiconductor data</span></div>
+        <div class="spec-row"><span class="k">Target</span><span class="v">Data Scientist / Engineer</span></div>
       </div>
     </div>
   </div>
@@ -189,11 +147,11 @@
     <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Selected work</span></div>
 
     <div class="project">
-      <div class="p-tag">SECOM</div>
+      <div class="p-idx"><span class="big">01</span>SECOM</div>
       <div>
         <div class="p-title">Semiconductor Wafer Defect Prediction</div>
-        <div class="p-sub">Random Forest · SHAP · imbalanced classification</div>
-        <p class="p-body">An end-to-end pipeline (EF-PIPELINE v3.1) predicting wafer defects from sensor telemetry on the SECOM dataset. The core challenge is severe class imbalance — defects are rare — so the work centers on recall and honest evaluation, with SHAP used to surface which sensor signals drive each prediction.</p>
+        <div class="p-sub">Random Forest &middot; SHAP &middot; imbalanced classification</div>
+        <p class="p-body">An end-to-end pipeline (EF-PIPELINE v3.1) predicting wafer defects from sensor telemetry on the SECOM dataset. The core challenge is severe class imbalance &mdash; defects are rare &mdash; so the work centers on recall and honest evaluation, with SHAP used to surface which sensor signals drive each prediction.</p>
         <div class="p-metrics">
           <div class="metric"><div class="n">0.98</div><div class="l">AUC (cross-val)</div></div>
           <div class="metric"><div class="n">0.91</div><div class="l">Recall</div></div>
@@ -203,11 +161,11 @@
     </div>
 
     <div class="project">
-      <div class="p-tag">DW / BI</div>
+      <div class="p-idx"><span class="big">02</span>DW / BI</div>
       <div>
         <div class="p-title">Fudgemart Customer Ratings Integration</div>
-        <div class="p-sub">Dimensional modeling · ELT · analytics</div>
-        <p class="p-body">A data-warehouse and BI build integrating customer ratings across two subsidiaries into one dimensional model. Sources were staged and transformed with dbt into Snowflake, then surfaced in Power BI — with a verified 100% match against the target on 2,972 records.</p>
+        <div class="p-sub">Dimensional modeling &middot; ELT &middot; analytics</div>
+        <p class="p-body">A data-warehouse and BI build integrating customer ratings across two subsidiaries into one dimensional model. Sources were staged and transformed with dbt into Snowflake, then surfaced in Power BI &mdash; with a verified 100% match against the target on 2,972 records.</p>
         <div class="p-metrics">
           <div class="metric"><div class="n">2,972</div><div class="l">Records</div></div>
           <div class="metric"><div class="n">100%</div><div class="l">Target match</div></div>
@@ -217,11 +175,11 @@
     </div>
 
     <div class="project">
-      <div class="p-tag">NLP</div>
+      <div class="p-idx"><span class="big">03</span>NLP</div>
       <div>
-        <div class="p-title">Support Ticket Classification & Data-Quality Diagnosis</div>
-        <div class="p-sub">Text classification · Zipf's Law · label-noise diagnostics</div>
-        <p class="p-body">A ticket-classification task that turned into a data-quality investigation. When macro F1 stalled around 0.20, I used Zipf's Law diagnostics to show the synthetic corpus carried significant label noise — reframing a "failed model" as evidence that the data, not the method, was the constraint.</p>
+        <div class="p-title">Support Ticket Classification &amp; Data-Quality Diagnosis</div>
+        <div class="p-sub">Text classification &middot; Zipf's Law &middot; label-noise diagnostics</div>
+        <p class="p-body">A ticket-classification task that turned into a data-quality investigation. When macro F1 stalled around 0.20, I used Zipf's Law diagnostics to show the synthetic corpus carried significant label noise &mdash; reframing a "failed model" as evidence that the data, not the method, was the constraint.</p>
         <div class="p-metrics">
           <div class="metric"><div class="n">~0.20</div><div class="l">Macro F1 (diagnostic)</div></div>
           <div class="metric"><div class="n">Zipf</div><div class="l">Noise evidence</div></div>
@@ -237,12 +195,12 @@
     <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">What I work with</span></div>
     <div class="skill-grid">
       <div class="skill-card">
-        <h4>Modeling & ML</h4>
+        <h4>Modeling &amp; ML</h4>
         <ul>
           <li>Random Forest, tree ensembles</li>
           <li>Imbalanced classification</li>
           <li>SHAP interpretability</li>
-          <li>NLP & text classification</li>
+          <li>NLP &amp; text classification</li>
         </ul>
       </div>
       <div class="skill-card">
@@ -255,7 +213,7 @@
         </ul>
       </div>
       <div class="skill-card">
-        <h4>Analysis & BI</h4>
+        <h4>Analysis &amp; BI</h4>
         <ul>
           <li>Python (pandas, scikit-learn)</li>
           <li>Power BI</li>
@@ -270,23 +228,23 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Get in touch</span></div>
-    <p style="color:var(--muted); max-width:560px;">Open to Data Scientist and Data Engineer roles, especially where a semiconductor or hardware background is an asset. The fastest way to reach me is email.</p>
+    <p style="color:var(--sub); max-width:560px;">Open to Data Scientist and Data Engineer roles, especially where a semiconductor or hardware background is an asset. The fastest way to reach me is email.</p>
     <div class="contact-links">
       <a class="btn primary" href="mailto:epel4252@gmail.com">epel4252@gmail.com</a>
-      <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">github.com/iamjeonghwan ↗</a>
+      <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">github.com/iamjeonghwan &#8599;</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">© 2026 Jeonghwan Son · Built for the IST 782 Applied Data Science Portfolio</div>
+  <div class="wrap">&copy; 2026 Jeonghwan Son &middot; Built for the IST 782 Applied Data Science Portfolio</div>
 </footer>
 
 <script>
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('section .wrap > *, .project').forEach((el, i) => {
+  document.querySelectorAll('section .wrap > *, .project').forEach((el,i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = (i % 4 * 0.05) + 's';
     obs.observe(el);
