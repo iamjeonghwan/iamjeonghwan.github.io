@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeonghwan Son — Data Scientist</title>
-<meta name="description" content="Data scientist bridging electronic engineering and applied data science, specializing in semiconductor data analysis.">
+<title>Jeonghwan Son — Data Scientist / Data Engineer</title>
+<meta name="description" content="M.S. Applied Data Science (Syracuse University) portfolio: semiconductor defect prediction, cloud data warehouse integration, and NLP dataset diagnostics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,6 +19,10 @@
     --line-strong: #1a1c1e;
     --accent: #b23a2e;
     --accent-ink: #8a2c22;
+    --navy: #10315c;
+    --slate: #5a6270;
+    --amber: #e07b18;
+    --green: #4a9b7f;
     --display: "Newsreader", Georgia, serif;
     --sans: "Inter", system-ui, sans-serif;
     --mono: "Space Mono", monospace;
@@ -40,15 +44,15 @@
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .brand { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; }
   .brand b { color: var(--accent); }
-  .navlinks { display: flex; gap: 28px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+  .navlinks { display: flex; gap: 24px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
   .navlinks a:hover { color: var(--accent); }
-  @media (max-width: 640px){ .navlinks{ display:none; } }
+  @media (max-width: 760px){ .navlinks{ display:none; } }
   header { padding: 96px 0 60px; border-bottom: 1px solid var(--line-strong); }
   .kicker { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px; }
   .kicker::before { content: ""; width: 34px; height: 1px; background: var(--accent); display: inline-block; }
   h1 { font-family: var(--display); font-weight: 500; font-size: clamp(2.5rem, 6vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 26px; }
   h1 em { font-style: italic; }
-  .lede { font-size: clamp(1.02rem, 2vw, 1.2rem); color: var(--sub); max-width: 610px; margin-bottom: 34px; }
+  .lede { font-size: clamp(1.02rem, 2vw, 1.2rem); color: var(--sub); max-width: 640px; margin-bottom: 34px; }
   .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn { font-family: var(--mono); font-size: 0.8rem; padding: 11px 20px; border: 1px solid var(--line-strong); color: var(--ink); transition: all 0.16s ease; }
   .btn.primary { background: var(--ink); color: var(--paper); }
@@ -67,109 +71,164 @@
   .spec-row:last-child { border-bottom: none; }
   .spec-row .k { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
   .spec-row .v { color: var(--ink); font-weight: 500; text-align: right; }
-  .project { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 34px 0; border-top: 1px solid var(--line); }
+
+  /* Executive summary highlights */
+  .summary-list { list-style: none; margin-top: 8px; }
+  .summary-list li { padding: 13px 0 13px 0; border-top: 1px solid var(--line); color: var(--sub); font-size: 0.92rem; }
+  .summary-list li b { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); font-weight: 400; margin-bottom: 3px; }
+
+  /* Education */
+  .edu { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 30px 0; border-top: 1px solid var(--line); }
+  .edu:first-of-type { border-top: none; padding-top: 0; }
+  @media (max-width: 640px){ .edu{ grid-template-columns:1fr; gap:10px; } }
+  .edu-place { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
+  .edu-school { font-family: var(--display); font-size: 1.3rem; font-weight: 500; letter-spacing: -0.01em; }
+  .edu-degree { font-family: var(--sans); font-size: 0.95rem; color: var(--sub); margin-bottom: 4px; }
+  .edu-meta { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 16px; }
+  .course-row { display: grid; grid-template-columns: 128px 1fr; gap: 14px; padding: 9px 0; border-top: 1px dotted var(--line); font-size: 0.85rem; }
+  @media (max-width: 640px){ .course-row{ grid-template-columns:1fr; gap:2px; } }
+  .course-row .ck { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .course-row .cv { color: var(--sub); }
+
+  /* Projects */
+  .project { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 40px 0; border-top: 1px solid var(--line); }
   .project:first-of-type { border-top: none; padding-top: 0; }
   @media (max-width: 640px){ .project{ grid-template-columns:1fr; gap:12px; } }
   .p-idx { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); }
   .p-idx .big { display: block; font-family: var(--display); font-size: 2rem; color: var(--ink); line-height: 1; margin-bottom: 4px; }
   .p-title { font-family: var(--display); font-size: 1.42rem; font-weight: 500; margin-bottom: 5px; letter-spacing: -0.01em; }
-  .p-sub { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); margin-bottom: 15px; }
-  .p-body { color: var(--sub); margin-bottom: 18px; max-width: 630px; }
-  .p-metrics { display: flex; gap: 34px; flex-wrap: wrap; margin-bottom: 18px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .p-sub { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); margin-bottom: 18px; }
+  .p-body { color: var(--sub); margin-bottom: 18px; max-width: 640px; }
+  .p-block { display: grid; grid-template-columns: 100px 1fr; gap: 14px; padding: 10px 0; border-top: 1px dotted var(--line); font-size: 0.9rem; max-width: 700px; }
+  @media (max-width: 640px){ .p-block{ grid-template-columns:1fr; gap:2px; } }
+  .p-block .bk { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
+  .p-block .bv { color: var(--sub); }
+  .p-block .bv strong { color: var(--ink); font-weight: 600; }
+  .p-metrics { display: flex; gap: 34px; flex-wrap: wrap; margin: 22px 0 18px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .metric .n { font-family: var(--display); font-size: 1.55rem; color: var(--ink); }
   .metric .l { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-  .stack { display: flex; gap: 7px; flex-wrap: wrap; }
+  .stack { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 14px; }
   .chip { font-family: var(--mono); font-size: 0.7rem; color: var(--sub); border: 1px solid var(--line); padding: 3px 9px; background: var(--panel); }
-  .skill-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--line); }
-  @media (max-width: 760px){ .skill-grid{ grid-template-columns:1fr; } }
-  .skill-card { padding: 24px; border-right: 1px solid var(--line); background: var(--panel); }
-  .skill-card:last-child { border-right: none; }
-  @media (max-width: 760px){ .skill-card{ border-right:none; border-bottom:1px solid var(--line);} .skill-card:last-child{border-bottom:none;} }
+  .repo { font-family: var(--mono); font-size: 0.74rem; color: var(--accent); border-bottom: 1px solid transparent; }
+  .repo:hover { border-bottom-color: var(--accent); }
+
+  /* Skills */
+  .skill-grid { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--line); }
+  @media (max-width: 900px){ .skill-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width: 640px){ .skill-grid{ grid-template-columns:1fr; } }
+  .skill-card { padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel); }
   .skill-card h4 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-  .skill-card ul { list-style: none; font-size: 0.9rem; color: var(--sub); }
+  .skill-card ul { list-style: none; font-size: 0.88rem; color: var(--sub); }
   .skill-card li { padding: 4px 0; border-bottom: 1px dotted var(--line); }
   .skill-card li:last-child { border-bottom: none; }
+
+  /* Credentials */
+  .cred { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; border: 1px solid var(--line); }
+  @media (max-width: 760px){ .cred{ grid-template-columns:1fr; } }
+  .cred > div { padding: 24px; background: var(--panel); border-right: 1px solid var(--line); }
+  .cred > div:last-child { border-right: none; }
+  .cred h4 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .cred p { font-size: 0.9rem; color: var(--sub); }
+
   #contact { border-bottom: none; }
   .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
   footer { padding: 30px 0; text-align: center; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line-strong); }
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
   .reveal.in { opacity: 1; transform: none; }
 
-  /* Project Visualizations */
+  /* ---------- Visualizations ---------- */
   .p-visual { margin: 24px 0; padding: 20px; background: var(--panel); border: 1px solid var(--line); }
-  .p-visual-title { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .p-visual-title { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .viz-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  @media (max-width: 700px){ .viz-2col{ grid-template-columns:1fr; gap:32px; } }
+  .viz-cap { font-family: var(--mono); font-size: 0.64rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .viz-sub { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--sub); margin-bottom: 14px; }
 
-  /* Pipeline Flow */
-  .pipeline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .pipe-stage { padding: 14px 18px; border: 2px solid var(--line); text-align: center; min-width: 110px; background: var(--panel); }
-  .pipe-stage.pass { border-color: #4a9b7f; }
-  .pipe-stage.warn { border-color: #d4a84b; }
-  .pipe-stage.fail { border-color: var(--accent); }
-  .pipe-stage .label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); margin-bottom: 4px; }
-  .pipe-stage.pass .label { color: #4a9b7f; }
-  .pipe-stage.warn .label { color: #d4a84b; }
-  .pipe-stage.fail .label { color: var(--accent); }
-  .pipe-stage .value { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--ink); }
-  .pipe-arrow { color: var(--muted); font-size: 1.2rem; }
-  .pipe-branch { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .pipe-branch .down { font-size: 1rem; color: var(--muted); }
-  .pipe-reinspect { padding: 8px 14px; border: 1px dashed var(--muted); font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  /* ELT / model pipeline */
+  .pipeline { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; }
+  .pipe-stage { flex: 1; min-width: 104px; padding: 12px 12px; border: 1px solid var(--line); text-align: center; background: var(--panel); }
+  .pipe-stage.hi { border-color: var(--navy); border-width: 2px; }
+  .pipe-stage.out { border-color: var(--accent); border-width: 2px; }
+  .pipe-stage .label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 5px; }
+  .pipe-stage.hi .label { color: var(--navy); }
+  .pipe-stage.out .label { color: var(--accent); }
+  .pipe-stage .value { font-size: 0.82rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .pipe-stage .note { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); margin-top: 4px; }
+  .pipe-arrow { display: flex; align-items: center; color: var(--muted); font-size: 1rem; }
+  @media (max-width: 640px){
+    .pipeline { flex-direction: column; }
+    .pipe-arrow { justify-content: center; transform: rotate(90deg); }
+  }
 
-  /* Class Distribution Bar */
-  .class-bar { display: flex; height: 28px; border: 1px solid var(--line); overflow: hidden; margin-top: 12px; }
-  .class-bar .pass { background: #4a9b7f; display: flex; align-items: center; padding-left: 10px; }
-  .class-bar .fail { background: var(--accent); display: flex; align-items: center; justify-content: center; }
-  .class-bar span { font-family: var(--mono); font-size: 0.68rem; color: #fff; white-space: nowrap; }
-
-  /* Star Schema */
-  .star-schema { display: grid; grid-template-columns: 1fr 1.2fr 1fr; grid-template-rows: auto auto auto; gap: 10px; max-width: 500px; }
-  .schema-fact { grid-column: 2; grid-row: 2; background: var(--accent); color: #fff; padding: 16px; text-align: center; }
-  .schema-fact .name { font-family: var(--mono); font-size: 0.72rem; margin-bottom: 4px; }
-  .schema-fact .rows { font-family: var(--display); font-size: 1.4rem; font-weight: 500; }
-  .schema-dim { background: var(--panel); border: 1px solid #4a9b7f; padding: 10px; text-align: center; }
-  .schema-dim .name { font-family: var(--mono); font-size: 0.65rem; color: #4a9b7f; }
-  .schema-dim .rows { font-family: var(--sans); font-size: 0.78rem; color: var(--sub); }
+  /* Star schema */
+  .star-schema { display: grid; grid-template-columns: 1fr 1.3fr 1fr; grid-template-rows: auto auto auto; gap: 10px; }
+  .schema-fact { grid-column: 2; grid-row: 2; background: var(--accent); color: #fff; padding: 14px; text-align: center; }
+  .schema-fact .name { font-family: var(--mono); font-size: 0.68rem; margin-bottom: 3px; }
+  .schema-fact .rows { font-family: var(--display); font-size: 1.35rem; font-weight: 500; }
+  .schema-fact .unit { font-family: var(--mono); font-size: 0.58rem; opacity: 0.85; }
+  .schema-dim { background: var(--panel); border: 1px solid var(--navy); padding: 9px; text-align: center; }
+  .schema-dim .name { font-family: var(--mono); font-size: 0.63rem; color: var(--navy); }
+  .schema-dim .rows { font-family: var(--sans); font-size: 0.72rem; color: var(--muted); }
   .schema-dim.d1 { grid-column: 1; grid-row: 1; }
   .schema-dim.d2 { grid-column: 3; grid-row: 1; }
   .schema-dim.d3 { grid-column: 1; grid-row: 3; }
   .schema-dim.d4 { grid-column: 3; grid-row: 3; }
-  .schema-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.1rem; }
+  .schema-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1rem; }
   .schema-arrow.a1 { grid-column: 2; grid-row: 1; }
   .schema-arrow.a2 { grid-column: 1; grid-row: 2; }
   .schema-arrow.a3 { grid-column: 3; grid-row: 2; }
   .schema-arrow.a4 { grid-column: 2; grid-row: 3; }
-
-  /* Zipf Chart */
-  .zipf-chart { position: relative; height: 160px; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); margin: 10px 20px 30px 40px; }
-  .zipf-chart .y-label { position: absolute; left: -38px; top: 50%; transform: rotate(-90deg) translateX(50%); font-family: var(--mono); font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
-  .zipf-chart .x-label { position: absolute; bottom: -22px; right: 0; font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
-  .zipf-curve { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; }
-  .zipf-curve svg { width: 100%; height: 100%; }
-  .zipf-annotation { position: absolute; bottom: 8px; right: 8px; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); background: var(--panel); padding: 2px 6px; }
-
-  /* Ticket Distribution */
-  .ticket-bars { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
-  .ticket-bar { display: flex; align-items: center; gap: 10px; }
-  .ticket-bar .label { font-family: var(--sans); font-size: 0.78rem; color: var(--sub); width: 130px; flex-shrink: 0; }
-  .ticket-bar .bar { height: 18px; background: var(--muted); transition: width 0.4s ease; }
-  .ticket-bar:first-child .bar { background: var(--accent); }
-  .ticket-bar .count { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); width: 50px; }
-
-  /* Responsive for visualizations */
-  @media (max-width: 640px) {
-    .pipeline { flex-direction: column; align-items: stretch; }
-    .pipe-arrow { transform: rotate(90deg); align-self: center; }
-    .pipe-branch { flex-direction: row; gap: 8px; }
-    .pipe-branch .down { transform: rotate(-90deg); }
-    .star-schema { grid-template-columns: 1fr 1fr; gap: 8px; max-width: 100%; }
-    .schema-fact { grid-column: span 2; }
+  @media (max-width: 700px) {
+    .star-schema { grid-template-columns: 1fr 1fr; }
+    .schema-fact { grid-column: span 2; grid-row: 2; }
     .schema-dim.d1 { grid-column: 1; grid-row: 1; }
     .schema-dim.d2 { grid-column: 2; grid-row: 1; }
     .schema-dim.d3 { grid-column: 1; grid-row: 3; }
     .schema-dim.d4 { grid-column: 2; grid-row: 3; }
     .schema-arrow { display: none; }
-    .p-visual > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
   }
+
+  /* Column chart */
+  .colchart { display: flex; align-items: flex-end; gap: 16px; height: 158px; border-bottom: 2px solid var(--ink); }
+  .colchart .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .colchart .val { font-family: var(--display); font-size: 1.05rem; line-height: 1; margin-bottom: 6px; }
+  .colchart .bar { width: 100%; max-width: 74px; background: var(--navy); }
+  .colchart .col.slate .bar { background: var(--slate); }
+  .colchart .col.hot .bar { background: var(--amber); }
+  .colchart-labels { display: flex; gap: 16px; margin-top: 9px; }
+  .colchart-labels div { flex: 1; text-align: center; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); line-height: 1.45; }
+
+  /* Horizontal bar chart */
+  .hbars { display: flex; flex-direction: column; gap: 7px; }
+  .hbar { display: flex; align-items: center; gap: 10px; }
+  .hbar .label { font-family: var(--sans); font-size: 0.78rem; color: var(--sub); width: 118px; flex-shrink: 0; text-align: right; }
+  .hbar .track { flex: 1; }
+  .hbar .bar { height: 17px; background: var(--navy); }
+  .hbar.dim .bar { background: var(--slate); }
+  .hbar .count { font-family: var(--mono); font-size: 0.68rem; color: var(--sub); width: 42px; flex-shrink: 0; }
+  @media (max-width: 640px){ .hbar .label{ width: 92px; font-size: 0.72rem; } }
+
+  /* Zipf line chart */
+  .zipf-chart { position: relative; height: 168px; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); margin: 6px 6px 26px 40px; }
+  .zipf-chart .y-label { position: absolute; left: -34px; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: center; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); white-space: nowrap; }
+  .zipf-chart .x-label { position: absolute; bottom: -20px; right: 0; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+  .zipf-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .zipf-legend { display: flex; flex-direction: column; gap: 5px; margin-top: -14px; }
+  .zipf-legend div { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.62rem; color: var(--sub); }
+  .zipf-legend i { width: 22px; height: 0; border-top: 2px solid var(--navy); display: inline-block; }
+  .zipf-legend i.synth { border-top: 2px solid var(--amber); }
+  .zipf-legend i.ideal { border-top: 2px dashed var(--navy); }
+
+  /* F1 delta */
+  .f1-rows { display: flex; flex-direction: column; gap: 10px; }
+  .f1-row { display: flex; align-items: center; gap: 10px; }
+  .f1-row .label { font-family: var(--sans); font-size: 0.78rem; color: var(--sub); width: 118px; flex-shrink: 0; text-align: right; }
+  .f1-row .track { flex: 1; height: 20px; background: #f1eee7; position: relative; }
+  .f1-row .fill { height: 100%; background: var(--slate); }
+  .f1-row.best .fill { background: var(--navy); }
+  .f1-row .count { font-family: var(--mono); font-size: 0.68rem; color: var(--sub); width: 52px; flex-shrink: 0; }
+  .chance-note { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.62rem; color: var(--accent); margin-top: 10px; }
+  .chance-note::before { content: ""; width: 22px; border-top: 2px dashed var(--accent); }
 </style>
 </head>
 <body>
@@ -179,6 +238,7 @@
     <div class="brand">JEONGHWAN <b>SON</b></div>
     <div class="navlinks">
       <a href="#about">about</a>
+      <a href="#education">education</a>
       <a href="#work">work</a>
       <a href="#skills">skills</a>
       <a href="#contact">contact</a>
@@ -188,9 +248,9 @@
 
 <header>
   <div class="wrap">
-    <div class="kicker">Data Scientist · Semiconductor Analytics</div>
-    <h1>Reading signal<br>from the <em>fab floor</em>.</h1>
-    <p class="lede">I bridge electronic engineering and applied data science — turning noisy semiconductor and enterprise data into models people can defend, question, and act on.</p>
+    <div class="kicker">Data Scientist · Data Engineer</div>
+    <h1>From raw sensors<br>to <em>defensible</em> models.</h1>
+    <p class="lede">I bring a dual perspective to complex technical data, combining a background in electronic engineering with graduate training in data science &mdash; connecting raw manufacturing signals, enterprise transactional systems, and unstructured text to actionable insight.</p>
     <div class="cta-row">
       <a class="btn primary" href="#work">View projects</a>
       <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">GitHub &#8599;</a>
@@ -200,19 +260,62 @@
 
 <section id="about">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">About</span></div>
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Executive summary</span></div>
     <div class="about-grid">
       <div>
-        <p>I'm a graduate of the <strong>M.S. Applied Data Science</strong> program at Syracuse University, with a B.S. in <strong>Electronic Engineering</strong> from Hanyang University in Seoul.</p>
-        <p>That combination shapes how I work. A defect map from a wafer line and a customer-ratings table from a data warehouse are both signal problems &mdash; but semiconductor data carries physics, process context, and failure modes that a generic pipeline misses. I build models that respect where the data comes from.</p>
-        <p>I care about <strong>defensible results</strong>: qualifying a metric honestly, treating a low score as a diagnostic finding rather than hiding it, and validating claims against real data before they reach a slide.</p>
+        <p>My focus is <strong>scalable ELT data warehouse design</strong>, <strong>feature-engineering workflows</strong>, and <strong>predictive machine learning models</strong>. A defect map from a wafer line and a customer-ratings table from an OLTP system are both signal problems &mdash; but semiconductor data carries physics, process context, and failure modes that a generic pipeline misses.</p>
+        <ul class="summary-list">
+          <li><b>Predictive modeling</b>Built an end-to-end semiconductor defect prediction pipeline (SECOM EF-PIPELINE v3.1) using autoencoder feature extraction and ensemble trees, reaching a 0.98 Test AUC under cross-validation in isolating high-risk wafers.</li>
+          <li><b>Data warehouse integration</b>Modeled and validated 2,972 conformed records on Snowflake via automated dbt models, unifying data across two subsidiaries.</li>
+          <li><b>NLP classification &amp; diagnostics</b>Constructed a 10-fold cross-validation text-classification pipeline, using statistical diagnostic tools (Zipf's Law) to analyze dataset quality and evaluate metadata-augmented feature models.</li>
+        </ul>
       </div>
       <div class="spec">
         <div class="spec-row"><span class="k">Degree</span><span class="v">M.S. Applied Data Science</span></div>
         <div class="spec-row"><span class="k">GPA</span><span class="v">4.0 / 4.0</span></div>
+        <div class="spec-row"><span class="k">Credits</span><span class="v">34</span></div>
         <div class="spec-row"><span class="k">Foundation</span><span class="v">B.S. Electronic Eng.</span></div>
-        <div class="spec-row"><span class="k">Focus</span><span class="v">Semiconductor data</span></div>
+        <div class="spec-row"><span class="k">Domain</span><span class="v">Semiconductor / wafer test</span></div>
         <div class="spec-row"><span class="k">Target</span><span class="v">Data Scientist / Engineer</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Education</span></div>
+
+    <div class="edu">
+      <div class="edu-place">Syracuse, NY<br>USA</div>
+      <div>
+        <div class="edu-school">Syracuse University</div>
+        <div class="edu-degree">M.S. in Applied Data Science</div>
+        <div class="edu-meta">GPA 4.0 / 4.0 &nbsp;·&nbsp; 34 credits</div>
+        <div class="course-row">
+          <span class="ck">Primary core</span>
+          <span class="cv">Introduction to Data Science (IST&nbsp;687), Applied Machine Learning (IST&nbsp;707), Quantitative Reasoning for Data Science (IST&nbsp;686), Data Administration Concepts &amp; Database Management (IST&nbsp;659), Business Analytics (SCM&nbsp;651)</span>
+        </div>
+        <div class="course-row">
+          <span class="ck">Secondary core</span>
+          <span class="cv">Scripting for Data Analysis (IST&nbsp;652), Data Warehouse (IST&nbsp;722)</span>
+        </div>
+        <div class="course-row">
+          <span class="ck">Electives</span>
+          <span class="cv">Deep Learning in Practice (IST&nbsp;691), Natural Language Processing (IST&nbsp;664), Cloud Management (IST&nbsp;615), Information Policy (IST&nbsp;618)</span>
+        </div>
+        <div class="course-row">
+          <span class="ck">Capstone</span>
+          <span class="cv">Applied Data Science Portfolio (IST&nbsp;782)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu">
+      <div class="edu-place">Seoul<br>South Korea</div>
+      <div>
+        <div class="edu-school">Hanyang University</div>
+        <div class="edu-degree">B.S. in Electronic Engineering</div>
       </div>
     </div>
   </div>
@@ -220,174 +323,202 @@
 
 <section id="work">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Selected work</span></div>
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Projects</span></div>
 
+    <!-- ============ PROJECT 1 — IST 722 ============ -->
     <div class="project">
-      <div class="p-idx"><span class="big">01</span>SECOM</div>
+      <div class="p-idx"><span class="big">01</span>IST 722</div>
       <div>
-        <div class="p-title">Semiconductor Wafer Defect Prediction</div>
-        <div class="p-sub">3-Stage Classification &middot; Balanced RF &middot; SHAP</div>
-        <p class="p-body">A 3-stage classification pipeline predicting rare wafer defects from 590 sensor signals (1,567 samples, 6.64% defect rate). The multi-stage approach separates confident decisions from uncertain ones: confident Pass units are released, confirmed Fail units are flagged, and uncertain cases go to human re-inspection. Zero defects escaped the Pass gate.</p>
+        <div class="p-title">Fudgemart, Inc. DW/BI Initiative &mdash; Customer Ratings Integration</div>
+        <div class="p-sub">Snowflake &middot; dbt &middot; Kimball Star Schema &middot; Power BI</div>
+        <p class="p-body">FudgeMart (retail) and FudgeFlix (streaming) ran on isolated OLTP systems, blocking cross-subsidiary analysis and cross-selling. I unified both into a single conformed Star Schema on Snowflake with automated dbt transforms and schema validation.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">1,039 FudgeMart product reviews + 1,933 FudgeFlix reviews, unified into <strong>2,972 rating records</strong> across 11 source tables.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Snowflake, dbt (<strong>27 models</strong>: 16 staging views, 11 target marts), Kimball Star Schema, Power BI.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Automated verification proved <strong>100% target match across all 11 warehouse tables</strong>; isolated 14 shared customer profiles via cross-company email matching. A 3-level dashboard showed streaming satisfaction (2.72 avg) above retail (2.49 avg) and flagged the retail clothing category (2.41 avg) for restructuring.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Reconciled mismatched data types across siloed systems. Next: connect text fields into a sentiment ingestion channel.</span></div>
 
         <div class="p-visual">
-          <div class="p-visual-title">3-Stage Classification Pipeline</div>
-          <div class="pipeline">
-            <div class="pipe-stage pass">
-              <div class="label">STAGE 1</div>
-              <div class="value">Confident Pass</div>
-            </div>
-            <span class="pipe-arrow">→</span>
-            <div class="pipe-branch">
-              <div class="pipe-stage warn">
-                <div class="label">STAGE 2</div>
-                <div class="value">Fail Candidates</div>
+          <div class="p-visual-title">Conformed Star Schema &amp; Cross-Subsidiary Ratings</div>
+          <div class="viz-2col">
+            <div>
+              <div class="viz-sub">Star schema</div>
+              <div class="star-schema">
+                <div class="schema-dim d1"><div class="name">dim_customer</div><div class="rows">14 shared profiles</div></div>
+                <div class="schema-arrow a1">&darr;</div>
+                <div class="schema-dim d2"><div class="name">dim_date</div><div class="rows">conformed calendar</div></div>
+                <div class="schema-arrow a2">&rarr;</div>
+                <div class="schema-fact">
+                  <div class="name">fact_customer_ratings</div>
+                  <div class="rows">2,972</div>
+                  <div class="unit">conformed records</div>
+                </div>
+                <div class="schema-arrow a3">&larr;</div>
+                <div class="schema-dim d3"><div class="name">dim_product</div><div class="rows">retail + streaming</div></div>
+                <div class="schema-arrow a4">&uarr;</div>
+                <div class="schema-dim d4"><div class="name">dim_channel</div><div class="rows">FudgeMart / FudgeFlix</div></div>
               </div>
-              <span class="down">↓</span>
-              <div class="pipe-reinspect">Re-inspection</div>
+              <div class="viz-cap">27 dbt models &mdash; 16 staging views &rarr; 11 target marts, each row-count validated against source.</div>
             </div>
-            <span class="pipe-arrow">→</span>
-            <div class="pipe-stage fail">
-              <div class="label">STAGE 3</div>
-              <div class="value">Confirmed Fail</div>
-            </div>
-          </div>
-          <div class="class-bar">
-            <div class="pass" style="width: 93.4%;"><span>PASS 93.4%</span></div>
-            <div class="fail" style="width: 6.6%;"><span>6.6%</span></div>
-          </div>
-        </div>
-
-        <div class="p-metrics">
-          <div class="metric"><div class="n">0.79</div><div class="l">Test AUC</div></div>
-          <div class="metric"><div class="n">100%</div><div class="l">Pass Confidence</div></div>
-          <div class="metric"><div class="n">0</div><div class="l">Missed Defects</div></div>
-        </div>
-        <div class="stack"><span class="chip">Python</span><span class="chip">XGBoost</span><span class="chip">Balanced RF</span><span class="chip">SMOTE</span><span class="chip">SHAP</span><span class="chip">Stacking</span></div>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="p-idx"><span class="big">02</span>DW / BI</div>
-      <div>
-        <div class="p-title">Fudgemart Customer Ratings Integration</div>
-        <div class="p-sub">Kimball Star Schema &middot; dbt &middot; Snowflake &middot; Power BI</div>
-        <p class="p-body">A data-warehouse integrating customer ratings from FudgeMart (physical retail: 25 customers, 1,039 ratings) and FudgeFlix (digital streaming: 35 accounts, 1,933 ratings) into a unified Star Schema. Solved ID-type mismatches, matched 14 shared customers via email, and built modular dbt transforms for cross-subsidiary analytics.</p>
-
-        <div class="p-visual">
-          <div class="p-visual-title">Star Schema Design</div>
-          <div class="star-schema">
-            <div class="schema-dim d1">
-              <div class="name">dim_customer</div>
-              <div class="rows">60 rows</div>
-            </div>
-            <div class="schema-arrow a1">↓</div>
-            <div class="schema-dim d2">
-              <div class="name">dim_date</div>
-              <div class="rows">~10,950 days</div>
-            </div>
-            <div class="schema-arrow a2">→</div>
-            <div class="schema-fact">
-              <div class="name">fact_customer_ratings</div>
-              <div class="rows">2,972</div>
-            </div>
-            <div class="schema-arrow a3">←</div>
-            <div class="schema-dim d3">
-              <div class="name">dim_product</div>
-              <div class="rows">7,238 rows</div>
-            </div>
-            <div class="schema-arrow a4">↑</div>
-            <div class="schema-dim d4">
-              <div class="name">dim_employee</div>
-              <div class="rows">33 rows</div>
+            <div>
+              <div class="viz-sub">Avg rating by subsidiary (1.0 &ndash; 5.0)</div>
+              <div class="colchart">
+                <div class="col"><span class="val">2.72</span><div class="bar" style="height:77.7%"></div></div>
+                <div class="col slate"><span class="val">2.49</span><div class="bar" style="height:71.1%"></div></div>
+                <div class="col hot"><span class="val">2.41</span><div class="bar" style="height:68.9%"></div></div>
+              </div>
+              <div class="colchart-labels">
+                <div>FudgeFlix<br>(Streaming)</div>
+                <div>FudgeMart<br>(Retail Total)</div>
+                <div>Retail: Clothing<br>(Restructure Target)</div>
+              </div>
+              <div class="viz-cap">Streaming outperforms retail; clothing is the weakest category and the restructuring candidate.</div>
             </div>
           </div>
         </div>
 
         <div class="p-metrics">
-          <div class="metric"><div class="n">2,972</div><div class="l">Ratings Integrated</div></div>
-          <div class="metric"><div class="n">7+5</div><div class="l">Dims + Facts</div></div>
+          <div class="metric"><div class="n">2,972</div><div class="l">Conformed Records</div></div>
+          <div class="metric"><div class="n">27</div><div class="l">dbt Models</div></div>
+          <div class="metric"><div class="n">100%</div><div class="l">Target Match (11 tables)</div></div>
           <div class="metric"><div class="n">14</div><div class="l">Shared Customers</div></div>
         </div>
-        <div class="stack"><span class="chip">Snowflake</span><span class="chip">dbt</span><span class="chip">Power BI</span><span class="chip">SQL</span><span class="chip">Kimball</span></div>
+        <div class="stack"><span class="chip">Snowflake</span><span class="chip">dbt</span><span class="chip">Power BI</span><span class="chip">SQL</span><span class="chip">Kimball</span><span class="chip">Schema Validation</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST722" target="_blank" rel="noopener">github.com/iamjeonghwan/IST722 &#8599;</a>
       </div>
     </div>
 
+    <!-- ============ PROJECT 2 — IST 707 ============ -->
     <div class="project">
-      <div class="p-idx"><span class="big">03</span>NLP</div>
+      <div class="p-idx"><span class="big">02</span>IST 707</div>
       <div>
-        <div class="p-title">Support Ticket Classification &amp; Data-Quality Diagnosis</div>
-        <div class="p-sub">NLTK &middot; Naive Bayes &middot; Logistic Regression &middot; Zipf's Law</div>
-        <p class="p-body">A 5-class text classification task on 8,469 customer support tickets using NLTK preprocessing (tokenization, stop-word removal, Bag-of-Words). When Macro F1 plateaued at ~0.20 across all configurations, Zipf's Law analysis revealed the dataset was synthetic with weak text-label correlation &mdash; reframing a "failed model" as evidence that the data, not the method, was the constraint. A low score, correctly diagnosed, is a finding &mdash; not a failure.</p>
+        <div class="p-title">Semiconductor Wafer Defect Prediction &mdash; EF-PIPELINE v3.1</div>
+        <div class="p-sub">Autoencoder Feature Extraction &middot; Ensemble Trees &middot; SHAP</div>
+        <p class="p-body">Semiconductor fabrication generates highly collinear sensor readings where subtle tool deviations cause compound yield drops. Rule-based single-variable alerts miss non-linear multivariate interactions, so I built a leakage-safe pipeline that compresses the inline parameter grid and learns those interactions directly.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">SECOM dataset (UCI ML Repository): <strong>1,567 wafers</strong> across <strong>591 continuous inline tool parameters</strong> with heavy class imbalance.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Python, Scikit-Learn, CatBoost, XGBoost, Neural Network Autoencoders (MLPRegressor), RobustScaler, SHAP.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Prevented data leakage by fitting preparation statistics inside train folds only; removed &gt;15% missing and constant parameters and applied a Pearson correlation filter (|r|&nbsp;&gt;&nbsp;0.8). Autoencoders compressed the high-dimensional grid into a latent space, and an optimized Random Forest reached a <strong>0.98 Test AUC</strong> (0.94 accuracy, 0.91 recall) under cross-validation. SHAP identified Viscosity, Reaction Temperature, and Mixing Time as leading failure drivers.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Gained experience handling sparse classes and safe scaling. Next: embed the pipeline into a stream-based early-warning engine.</span></div>
 
         <div class="p-visual">
-          <div class="p-visual-title">Zipf's Law Analysis &amp; Ticket Distribution</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div class="p-visual-title">EF-PIPELINE v3.1 &amp; Top Defect Drivers via SHAP</div>
+          <div class="viz-sub">Leakage-safe pipeline (all statistics fit inside train folds)</div>
+          <div class="pipeline">
+            <div class="pipe-stage">
+              <div class="label">RAW</div>
+              <div class="value">591 params</div>
+              <div class="note">1,567 wafers</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage">
+              <div class="label">CLEAN</div>
+              <div class="value">Drop &gt;15% missing<br>&amp; constant</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage">
+              <div class="label">DECORRELATE</div>
+              <div class="value">Pearson filter</div>
+              <div class="note">|r| &gt; 0.8</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage hi">
+              <div class="label">COMPRESS</div>
+              <div class="value">Autoencoder<br>latent space</div>
+              <div class="note">MLPRegressor</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage out">
+              <div class="label">PREDICT</div>
+              <div class="value">Optimized RF</div>
+              <div class="note">AUC 0.98</div>
+            </div>
+          </div>
+
+          <div style="margin-top:26px;">
+            <div class="viz-sub">Mean |SHAP value| &mdash; impact on defect probability</div>
+            <div class="hbars">
+              <div class="hbar"><span class="label">Reaction Temp</span><div class="track"><div class="bar" style="width:84%"></div></div><span class="count">0.42</span></div>
+              <div class="hbar"><span class="label">Mixing Time</span><div class="track"><div class="bar" style="width:76%"></div></div><span class="count">0.38</span></div>
+              <div class="hbar"><span class="label">Viscosity</span><div class="track"><div class="bar" style="width:62%"></div></div><span class="count">0.31</span></div>
+              <div class="hbar dim"><span class="label">Sensor_421</span><div class="track"><div class="bar" style="width:36%"></div></div><span class="count">0.18</span></div>
+              <div class="hbar dim"><span class="label">Sensor_108</span><div class="track"><div class="bar" style="width:24%"></div></div><span class="count">0.12</span></div>
+            </div>
+            <div class="viz-cap">Process-physics variables dominate raw sensor channels &mdash; the model's drivers are interpretable to a process engineer.</div>
+          </div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">0.98</div><div class="l">Test AUC (CV)</div></div>
+          <div class="metric"><div class="n">0.94</div><div class="l">Accuracy</div></div>
+          <div class="metric"><div class="n">0.91</div><div class="l">Recall</div></div>
+          <div class="metric"><div class="n">591</div><div class="l">Inline Parameters</div></div>
+        </div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">Scikit-Learn</span><span class="chip">CatBoost</span><span class="chip">XGBoost</span><span class="chip">Autoencoder</span><span class="chip">RobustScaler</span><span class="chip">SMOTE</span><span class="chip">SHAP</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST707" target="_blank" rel="noopener">github.com/iamjeonghwan/IST707 &#8599;</a>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 3 — IST 664 ============ -->
+    <div class="project">
+      <div class="p-idx"><span class="big">03</span>IST 664</div>
+      <div>
+        <div class="p-title">Support Ticket Categorization &amp; Dataset Quality Diagnosis</div>
+        <div class="p-sub">NLTK &middot; Bag-of-Words &middot; 10-Fold CV &middot; Zipf's Law Diagnostics</div>
+        <p class="p-body">Support teams manually read, tag, and route thousands of tickets daily, causing delay. This project builds an automated text-classification engine using classical NLP features plus request metadata &mdash; and, when accuracy refused to move, diagnoses <em>why</em> instead of tuning blindly.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">Kaggle Enterprise Support Ticket Corpus: <strong>8,469 transcripts</strong> across <strong>5 categories</strong> (Billing, Cancellation, Product, Refund, Technical).</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Python, Pandas, NLTK (tokenization, stopwords, FreqDist, Na&iuml;ve Bayes), Scikit-Learn, Zipf's Law diagnostics.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Built regex extractors to drop template placeholders, numeric strings, and email blocks. Compared a 1,000-unigram boolean Bag-of-Words baseline against an augmented feature set (priority tags, channel, length flags). Under 10-fold cross-validation, adding metadata shifted macro F1 from <strong>0.1960 to 0.2002</strong>. Rather than a modeling flaw, Zipf's Law and distribution diagnostics proved the dataset suffered from heavy label noise and template overlaps &mdash; and the project used these insights to propose essential data governance steps prior to production deployment.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Practiced token-level extraction and diagnostic evaluation. Next: migrate to transformer embeddings (BERT) and real-world logging data.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">Zipf's Law Diagnostic &amp; Macro F1 under 10-Fold CV</div>
+          <div class="viz-2col">
             <div>
+              <div class="viz-sub">Word frequency vs. rank (log &ndash; log)</div>
               <div class="zipf-chart">
-                <span class="y-label">log(freq)</span>
-                <span class="x-label">log(rank)</span>
-                <div class="zipf-curve">
-                  <svg viewBox="0 0 200 100" preserveAspectRatio="none">
-                    <polyline
-                      points="10,5 25,18 45,32 65,45 90,58 115,68 140,76 165,83 190,90"
-                      fill="none"
-                      stroke="#b23a2e"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                    <circle cx="10" cy="5" r="4" fill="#b23a2e"/>
-                    <circle cx="25" cy="18" r="3" fill="#b23a2e"/>
-                    <circle cx="45" cy="32" r="3" fill="#b23a2e"/>
-                    <circle cx="65" cy="45" r="3" fill="#b23a2e"/>
-                    <circle cx="90" cy="58" r="3" fill="#b23a2e"/>
-                    <circle cx="115" cy="68" r="3" fill="#b23a2e"/>
-                    <circle cx="140" cy="76" r="3" fill="#b23a2e"/>
-                    <circle cx="165" cy="83" r="3" fill="#b23a2e"/>
-                    <circle cx="190" cy="90" r="3" fill="#b23a2e"/>
-                  </svg>
-                </div>
-                <span class="zipf-annotation">slope ≈ -1</span>
+                <span class="y-label">Word frequency</span>
+                <span class="x-label">Word rank</span>
+                <svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-label="Zipf's law diagnostic: the synthetic corpus decays far more slowly than an ideal natural-language corpus">
+                  <line x1="4" y1="6" x2="192" y2="52" stroke="#e07b18" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                  <line x1="4" y1="6" x2="192" y2="95" stroke="#10315c" stroke-width="2.4" stroke-dasharray="7 5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                </svg>
               </div>
+              <div class="zipf-legend">
+                <div><i class="ideal"></i> Ideal natural corpus (Zipf)</div>
+                <div><i class="synth"></i> Synthetic support corpus (noise)</div>
+              </div>
+              <div class="viz-cap">A natural corpus decays with slope &asymp;&nbsp;&minus;1. This corpus stays nearly flat &mdash; template repetition, not organic language.</div>
             </div>
             <div>
-              <div class="ticket-bars">
-                <div class="ticket-bar">
-                  <span class="label">Refund request</span>
-                  <div class="bar" style="width: 100%;"></div>
-                  <span class="count">1,752</span>
+              <div class="viz-sub">Macro F1, 10-fold cross-validation</div>
+              <div class="f1-rows">
+                <div class="f1-row">
+                  <span class="label">BoW baseline</span>
+                  <div class="track"><div class="fill" style="width:78.4%"></div></div>
+                  <span class="count">0.1960</span>
                 </div>
-                <div class="ticket-bar">
-                  <span class="label">Technical issue</span>
-                  <div class="bar" style="width: 99.7%;"></div>
-                  <span class="count">1,747</span>
-                </div>
-                <div class="ticket-bar">
-                  <span class="label">Cancellation</span>
-                  <div class="bar" style="width: 96.7%;"></div>
-                  <span class="count">1,695</span>
-                </div>
-                <div class="ticket-bar">
-                  <span class="label">Product inquiry</span>
-                  <div class="bar" style="width: 93.7%;"></div>
-                  <span class="count">1,641</span>
-                </div>
-                <div class="ticket-bar">
-                  <span class="label">Billing inquiry</span>
-                  <div class="bar" style="width: 93.3%;"></div>
-                  <span class="count">1,634</span>
+                <div class="f1-row best">
+                  <span class="label">+ metadata</span>
+                  <div class="track"><div class="fill" style="width:80.1%"></div></div>
+                  <span class="count">0.2002</span>
                 </div>
               </div>
-              <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--muted); margin-top: 10px; text-align: right;">Near-uniform distribution → synthetic data</div>
+              <div class="chance-note">Chance level for 5 balanced classes &asymp; 0.20</div>
+              <div class="viz-cap">Both configurations sit at chance. The ceiling is the label quality, not the classifier &mdash; a finding, not a failed model.</div>
             </div>
           </div>
         </div>
 
         <div class="p-metrics">
-          <div class="metric"><div class="n">8,469</div><div class="l">Tickets</div></div>
-          <div class="metric"><div class="n">5</div><div class="l">Classes</div></div>
-          <div class="metric"><div class="n">~0.20</div><div class="l">Macro F1 (diagnosed)</div></div>
+          <div class="metric"><div class="n">8,469</div><div class="l">Transcripts</div></div>
+          <div class="metric"><div class="n">5</div><div class="l">Categories</div></div>
+          <div class="metric"><div class="n">10-fold</div><div class="l">Cross-Validation</div></div>
+          <div class="metric"><div class="n">+0.0042</div><div class="l">Macro F1 &Delta; (metadata)</div></div>
         </div>
-        <div class="stack"><span class="chip">Python</span><span class="chip">NLTK</span><span class="chip">Naive Bayes</span><span class="chip">Logistic Regression</span><span class="chip">Zipf Analysis</span></div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NLTK</span><span class="chip">Na&iuml;ve Bayes</span><span class="chip">Bag-of-Words</span><span class="chip">Regex Cleansing</span><span class="chip">Zipf Diagnostics</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST664" target="_blank" rel="noopener">github.com/iamjeonghwan/IST664 &#8599;</a>
       </div>
     </div>
   </div>
@@ -395,34 +526,78 @@
 
 <section id="skills">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">What I work with</span></div>
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Skills</span></div>
     <div class="skill-grid">
       <div class="skill-card">
-        <h4>Modeling &amp; ML</h4>
+        <h4>Programming</h4>
         <ul>
-          <li>Random Forest, tree ensembles</li>
-          <li>Imbalanced classification</li>
-          <li>SHAP interpretability</li>
-          <li>NLP &amp; text classification</li>
+          <li>Python</li>
+          <li>SQL (Snowflake DDL / DML)</li>
+          <li>R</li>
         </ul>
       </div>
       <div class="skill-card">
         <h4>Data engineering</h4>
         <ul>
-          <li>Snowflake</li>
-          <li>dbt (ELT / transforms)</li>
-          <li>Dimensional modeling</li>
-          <li>SQL</li>
+          <li>Cloud data warehousing</li>
+          <li>Kimball dimensional modeling</li>
+          <li>dbt</li>
+          <li>Automated ELT / ETL pipelines</li>
+          <li>Schema validation</li>
         </ul>
       </div>
       <div class="skill-card">
-        <h4>Analysis &amp; BI</h4>
+        <h4>Machine learning</h4>
         <ul>
-          <li>Python (pandas, scikit-learn)</li>
-          <li>Power BI</li>
-          <li>Statistical diagnostics</li>
-          <li>Semiconductor data analysis</li>
+          <li>Ensemble learning (CatBoost, XGBoost, Random Forest)</li>
+          <li>Neural network autoencoders</li>
+          <li>Class imbalance mitigation (SMOTE, stratified folds)</li>
+          <li>SHAP interpretability</li>
         </ul>
+      </div>
+      <div class="skill-card">
+        <h4>Natural language processing</h4>
+        <ul>
+          <li>Regex cleansing, tokenization</li>
+          <li>Stop-word filtering</li>
+          <li>Bag-of-Words (BoW)</li>
+          <li>NLTK, Scikit-Learn classifiers</li>
+          <li>Zipf's Law diagnostics</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h4>BI &amp; visualization</h4>
+        <ul>
+          <li>Power BI</li>
+          <li>TIBCO Spotfire</li>
+          <li>Matplotlib</li>
+          <li>Seaborn</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h4>Domain</h4>
+        <ul>
+          <li>Wafer test protocols</li>
+          <li>Electronic component troubleshooting</li>
+          <li>Industrial system standardization</li>
+          <li>Advantest, Teradyne, Accretech platforms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Additional &amp; credentials</span></div>
+    <div class="cred">
+      <div>
+        <h4>Academic excellence</h4>
+        <p>Maintained a 4.0 / 4.0 cumulative GPA across the M.S. in Applied Data Science at Syracuse University.</p>
+      </div>
+      <div>
+        <h4>Semiconductor domain experience</h4>
+        <p>Professional engineering experience in wafer test protocols, electronic component troubleshooting, and industrial system standardization across automated hardware testing platforms (Advantest, Teradyne, Accretech).</p>
       </div>
     </div>
   </div>
@@ -430,24 +605,25 @@
 
 <section id="contact">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Get in touch</span></div>
-    <p style="color:var(--sub); max-width:560px;">Open to Data Scientist and Data Engineer roles, especially where a semiconductor or hardware background is an asset. The fastest way to reach me is email.</p>
+    <div class="sec-head"><span class="sec-num">06</span><span class="sec-title">Get in touch</span></div>
+    <p style="color:var(--sub); max-width:600px;">Open to Data Scientist and Data Engineer roles, especially where a semiconductor or hardware background is an asset. The fastest way to reach me is email.</p>
     <div class="contact-links">
       <a class="btn primary" href="mailto:epel4252@gmail.com">epel4252@gmail.com</a>
+      <a class="btn" href="tel:+821090984262">+82-10-9098-4262</a>
       <a class="btn" href="https://github.com/iamjeonghwan" target="_blank" rel="noopener">github.com/iamjeonghwan &#8599;</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">&copy; 2026 Jeonghwan Son &middot; Built for the IST 782 Applied Data Science Portfolio</div>
+  <div class="wrap">&copy; 2026 Jeonghwan Son &middot; Applied Data Science Portfolio (IST 782), Syracuse University</div>
 </footer>
 
 <script>
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('section .wrap > *, .project').forEach((el,i) => {
+  document.querySelectorAll('section .wrap > *, .project, .edu').forEach((el,i) => {
     el.classList.add('reveal');
     el.style.transitionDelay = (i % 4 * 0.05) + 's';
     obs.observe(el);
