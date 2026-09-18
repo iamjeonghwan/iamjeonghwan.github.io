@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jeonghwan Son — Data Scientist / Data Engineer</title>
-<meta name="description" content="M.S. Applied Data Science (Syracuse University) portfolio: semiconductor defect prediction, cloud data warehouse integration, and NLP dataset diagnostics.">
+<meta name="description" content="M.S. Applied Data Science (Syracuse University) portfolio: eight projects across five domains — semiconductor defect prediction, cloud data warehouse integration, PCB computer vision, NLP dataset diagnostics, database design, statistical inference, multi-source analytics, and cloud migration strategy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -39,6 +39,7 @@
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
+  code { font-family: var(--mono); font-size: 0.86em; color: var(--ink); }
   .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
   nav { position: sticky; top: 0; z-index: 20; background: rgba(250,248,244,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
@@ -333,6 +334,7 @@
 <section id="work">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Projects</span></div>
+    <p class="p-body" style="margin-bottom:38px;">Eight projects across five domains &mdash; data engineering, machine learning, computer vision, governance, and cloud strategy. The first four are the detailed spotlights; the remaining four round out the portfolio.</p>
 
     <!-- ============ PROJECT 1 — IST 722 ============ -->
     <div class="project" id="ist722">
@@ -468,9 +470,78 @@
       </div>
     </div>
 
-    <!-- ============ PROJECT 3 — IST 664 ============ -->
+    <!-- ============ PROJECT 3 — IST 691 ============ -->
+    <div class="project" id="ist691">
+      <div class="p-idx"><span class="big">03</span>IST 691</div>
+      <div>
+        <div class="p-title">PCB Defect Detection &amp; Segmentation</div>
+        <div class="p-sub">YOLOv8 &middot; U-Net &middot; TensorFlow / Keras &middot; OpenCV</div>
+        <p class="p-body">Manual inspection of printed circuit boards is slow and inconsistent. I chained two models instead of asking one to do both jobs: a YOLOv8 detector locates each defect, then a U-Net delineates it at pixel level &mdash; detection for triage, segmentation for measurement.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">PCB defect imagery evaluated on <strong>139 test images</strong> carrying <strong>601 labeled instances</strong> across six defect classes.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Stage 1: YOLOv8 bounding-box detection. Stage 2: regions of interest cropped from the detector output and passed to a Dice-loss-trained U-Net for pixel-level masks. TensorFlow / Keras and OpenCV.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Detection reached <strong>0.971 mAP@50</strong> with precision and recall both at 0.966. Segmentation reached <strong>0.939 mean Dice</strong>, 0.892 mean IoU, and a 0.939 best-threshold F1.</span></div>
+        <div class="p-block"><span class="bk">Limit</span><span class="bv">The segmentation masks were heuristically auto-generated from YOLO crops rather than hand-annotated. The Dice score therefore validates pipeline mechanics, not ground truth &mdash; stated here rather than buried in an appendix.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Replace the auto-masks with manual ground-truth annotation to test the assumption the Dice score rests on.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">Two-Stage Vision Pipeline &amp; Evaluation Scores</div>
+          <div class="viz-2col">
+            <div>
+              <div class="viz-sub">Detect, then delineate</div>
+              <div class="pipeline">
+                <div class="pipe-stage">
+                  <div class="label">STAGE 1</div>
+                  <div class="value">YOLOv8<br>detection</div>
+                  <div class="note">bounding boxes</div>
+                </div>
+                <span class="pipe-arrow">&rarr;</span>
+                <div class="pipe-stage hi">
+                  <div class="label">HANDOFF</div>
+                  <div class="value">ROI crop<br>+ auto-mask</div>
+                  <div class="note">detector output</div>
+                </div>
+                <span class="pipe-arrow">&rarr;</span>
+                <div class="pipe-stage out">
+                  <div class="label">STAGE 2</div>
+                  <div class="value">U-Net<br>segmentation</div>
+                  <div class="note">pixel masks</div>
+                </div>
+              </div>
+              <div class="viz-cap">Detection answers &ldquo;where&rdquo; and segmentation answers &ldquo;how much&rdquo; &mdash; each model doing the job it is actually good at.</div>
+              <div class="viz-sub" style="margin-top:20px;">Six defect classes</div>
+              <div class="stack" style="margin-bottom:0;">
+                <span class="chip">missing hole</span><span class="chip">mouse bite</span><span class="chip">open circuit</span><span class="chip">short</span><span class="chip">spur</span><span class="chip">spurious copper</span>
+              </div>
+            </div>
+            <div>
+              <div class="viz-sub">Evaluation scores (0 &ndash; 1)</div>
+              <div class="hbars">
+                <div class="hbar"><span class="label">mAP@50</span><div class="track"><div class="bar" style="width:97.1%"></div></div><span class="count">0.971</span></div>
+                <div class="hbar"><span class="label">Precision</span><div class="track"><div class="bar" style="width:96.6%"></div></div><span class="count">0.966</span></div>
+                <div class="hbar"><span class="label">Recall</span><div class="track"><div class="bar" style="width:96.6%"></div></div><span class="count">0.966</span></div>
+                <div class="hbar dim"><span class="label">Mean Dice</span><div class="track"><div class="bar" style="width:93.9%"></div></div><span class="count">0.939</span></div>
+                <div class="hbar dim"><span class="label">Best-thr. F1</span><div class="track"><div class="bar" style="width:93.9%"></div></div><span class="count">0.939</span></div>
+                <div class="hbar dim"><span class="label">Mean IoU</span><div class="track"><div class="bar" style="width:89.2%"></div></div><span class="count">0.892</span></div>
+              </div>
+              <div class="viz-cap">Navy bars are detection (Stage 1); grey bars are segmentation (Stage 2), whose ceiling is set by the auto-generated masks noted above.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">0.971</div><div class="l">mAP@50 (Detection)</div></div>
+          <div class="metric"><div class="n">0.939</div><div class="l">Mean Dice (Segmentation)</div></div>
+          <div class="metric"><div class="n">601</div><div class="l">Labeled Instances</div></div>
+          <div class="metric"><div class="n">6</div><div class="l">Defect Classes</div></div>
+        </div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">YOLOv8</span><span class="chip">U-Net</span><span class="chip">TensorFlow / Keras</span><span class="chip">OpenCV</span><span class="chip">Dice Loss</span></div>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 4 — IST 664 ============ -->
     <div class="project" id="ist664">
-      <div class="p-idx"><span class="big">03</span>IST 664</div>
+      <div class="p-idx"><span class="big">04</span>IST 664</div>
       <div>
         <div class="p-title">Support Ticket Categorization &amp; Dataset Quality Diagnosis</div>
         <div class="p-sub">NLTK &middot; Bag-of-Words &middot; 10-Fold CV &middot; Zipf's Law Diagnostics</div>
@@ -528,6 +599,245 @@
         </div>
         <div class="stack"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NLTK</span><span class="chip">Na&iuml;ve Bayes</span><span class="chip">Bag-of-Words</span><span class="chip">Regex Cleansing</span><span class="chip">Zipf Diagnostics</span></div>
         <a class="repo" href="https://github.com/iamjeonghwan/IST664" target="_blank" rel="noopener">github.com/iamjeonghwan/IST664 &#8599;</a>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 5 — IST 659 ============ -->
+    <div class="project" id="ist659">
+      <div class="p-idx"><span class="big">05</span>IST 659</div>
+      <div>
+        <div class="p-title">Starship Relaunch &mdash; Relational Database Design</div>
+        <div class="p-sub">SQL Server &middot; T-SQL &middot; Stored Procedures &middot; Triggers</div>
+        <p class="p-body">A playable text adventure driven entirely at the data layer. Movement, lock logic, and win conditions are enforced by T-SQL stored procedures and triggers rather than application code &mdash; the database is the game engine, not just its storage.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">A normalized <strong>8-table schema</strong> carrying <strong>19 constraints</strong> across rooms, items, players, inventory, and state transitions.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">SQL Server with T-SQL stored procedures and triggers holding the game rules, declarative referential integrity guarding state, and a Docker Compose setup with a thin Python driver so the whole game stands up from scratch reproducibly.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Room-to-room movement, lock-and-key logic, and win conditions all resolve inside the database. The 19 declarative constraints make invalid game states <em>unrepresentable</em> rather than merely unhandled &mdash; no application-side guard clause can be forgotten.</span></div>
+        <div class="p-block"><span class="bk">Takeaway</span><span class="bv">Pushing invariants down into the schema is cheaper than defending them in every caller above it.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">Game Logic Resolved Inside the Data Layer</div>
+          <div class="pipeline">
+            <div class="pipe-stage">
+              <div class="label">INPUT</div>
+              <div class="value">Player<br>command</div>
+              <div class="note">&ldquo;go north&rdquo;</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage hi">
+              <div class="label">LOGIC</div>
+              <div class="value">Stored<br>procedure</div>
+              <div class="note">T-SQL</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage hi">
+              <div class="label">GUARD</div>
+              <div class="value">Constraints<br>+ triggers</div>
+              <div class="note">19 constraints</div>
+            </div>
+            <span class="pipe-arrow">&rarr;</span>
+            <div class="pipe-stage out">
+              <div class="label">OUTPUT</div>
+              <div class="value">New game<br>state</div>
+              <div class="note">8 tables</div>
+            </div>
+          </div>
+          <div class="viz-cap">No application code arbitrates the rules. An illegal move fails at the constraint, not at a forgotten <code>if</code> statement.</div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">8</div><div class="l">Tables</div></div>
+          <div class="metric"><div class="n">19</div><div class="l">Constraints</div></div>
+          <div class="metric"><div class="n">T-SQL</div><div class="l">Procedures &amp; Triggers</div></div>
+          <div class="metric"><div class="n">Docker</div><div class="l">Reproducible Setup</div></div>
+        </div>
+        <div class="stack"><span class="chip">SQL Server</span><span class="chip">T-SQL</span><span class="chip">Stored Procedures</span><span class="chip">Triggers</span><span class="chip">Docker Compose</span><span class="chip">Python</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/game-db-docker" target="_blank" rel="noopener">github.com/iamjeonghwan/game-db-docker &#8599;</a>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 6 — IST 686 ============ -->
+    <div class="project" id="ist686">
+      <div class="p-idx"><span class="big">06</span>IST 686</div>
+      <div>
+        <div class="p-title">School Vaccination Exemption Modeling</div>
+        <div class="p-sub">R &middot; OLS &middot; Logistic Regression &middot; Null-Result Reporting</div>
+        <p class="p-body">Do school type and enrollment size predict vaccination exemption rates? I fitted both a linear and a logistic model, and no coefficient reached significance. The interesting part of this project is what I did with that.</p>
+
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">R (<code>lm</code> and <code>glm</code>): OLS regression on exemption rate and logistic regression on exemption incidence, with school type and enrollment as predictors.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">The OLS model explained effectively none of the variance (<strong>R&sup2; = 0.006</strong>). The logistic model returned an odds ratio of <strong>0.93 at p = 0.753</strong> &mdash; statistically indistinguishable from no effect at all.</span></div>
+        <div class="p-block"><span class="bk">Takeaway</span><span class="bv">Reported as a clean null result rather than an overstated weak effect. Framing a 0.753 p-value as a &ldquo;trend&rdquo; would have been the easier write-up and the less defensible one.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">What the Models Actually Supported</div>
+          <div class="viz-2col">
+            <div>
+              <div class="viz-sub">Variance explained by the OLS model</div>
+              <div class="f1-rows">
+                <div class="f1-row">
+                  <span class="label">R&sup2; = 0.006</span>
+                  <div class="track"><div class="fill" style="width:0.6%"></div></div>
+                  <span class="count">0.6%</span>
+                </div>
+                <div class="f1-row best">
+                  <span class="label">Unexplained</span>
+                  <div class="track"><div class="fill" style="width:99.4%"></div></div>
+                  <span class="count">99.4%</span>
+                </div>
+              </div>
+              <div class="viz-cap">School type and enrollment account for six tenths of one percent of the variation in exemption rates.</div>
+            </div>
+            <div>
+              <div class="viz-sub">Model output</div>
+              <div class="spec">
+                <div class="spec-row"><span class="k">OLS R-squared</span><span class="v">0.006</span></div>
+                <div class="spec-row"><span class="k">Odds ratio</span><span class="v">0.93</span></div>
+                <div class="spec-row"><span class="k">p-value</span><span class="v">0.753</span></div>
+                <div class="spec-row"><span class="k">Threshold</span><span class="v">&alpha; = 0.05</span></div>
+                <div class="spec-row"><span class="k">Verdict</span><span class="v">Null result</span></div>
+              </div>
+              <div class="chance-note">p = 0.753 sits fifteen times above the 0.05 threshold</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">0.006</div><div class="l">OLS R-squared</div></div>
+          <div class="metric"><div class="n">0.93</div><div class="l">Odds Ratio</div></div>
+          <div class="metric"><div class="n">0.753</div><div class="l">p-value</div></div>
+          <div class="metric"><div class="n">2</div><div class="l">Models Fitted</div></div>
+        </div>
+        <div class="stack"><span class="chip">R</span><span class="chip">OLS</span><span class="chip">Logistic Regression</span><span class="chip">Statistical Inference</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST686" target="_blank" rel="noopener">github.com/iamjeonghwan/IST686 &#8599;</a>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 7 — IST 652 ============ -->
+    <div class="project" id="ist652">
+      <div class="p-idx"><span class="big">07</span>IST 652</div>
+      <div>
+        <div class="p-title">AI Investment Boom vs. Big Tech Layoffs, 2020&ndash;2024</div>
+        <div class="p-sub">Multi-Source Scripting &middot; yfinance &middot; Web Scraping &middot; VADER</div>
+        <p class="p-body">Did the AI investment boom and the big-tech layoff wave actually move together? I combined four sources spanning structured, semi-structured, and unstructured data to test the question &mdash; then was deliberate about what the answer could and could not support.</p>
+
+        <div class="p-block"><span class="bk">Data</span><span class="bv">Four sources across three data types: layoff records, <strong>yfinance</strong> market prices, BBC headlines scraped via the Wayback Machine, and <strong>647 Reddit posts</strong>.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Python multi-source ingestion and reconciliation, share-of-coverage analysis on the headline corpus, VADER sentiment scoring on the Reddit text, and correlation analysis across the 2020&ndash;2024 window.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">AI's share of scraped headlines rose from <strong>1.8% to 8.3%</strong> over the window, concurrent with the layoff wave &mdash; but the correlation between the two series was only <strong>+0.11</strong>.</span></div>
+        <div class="p-block"><span class="bk">Takeaway</span><span class="bv">Concurrency is not causation. With a correlation that weak, the deliverable states the relationship as co-occurrence and stops there.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">Four Sources, Three Data Types &mdash; and One Careful Conclusion</div>
+          <div class="viz-2col">
+            <div>
+              <div class="viz-sub">Ingestion across data types</div>
+              <div class="pipeline">
+                <div class="pipe-stage">
+                  <div class="label">STRUCTURED</div>
+                  <div class="value">Layoff records<br>+ yfinance</div>
+                  <div class="note">tabular / API</div>
+                </div>
+                <span class="pipe-arrow">+</span>
+                <div class="pipe-stage">
+                  <div class="label">SEMI</div>
+                  <div class="value">BBC headlines</div>
+                  <div class="note">Wayback scrape</div>
+                </div>
+                <span class="pipe-arrow">+</span>
+                <div class="pipe-stage hi">
+                  <div class="label">UNSTRUCTURED</div>
+                  <div class="value">647 Reddit<br>posts</div>
+                  <div class="note">VADER sentiment</div>
+                </div>
+              </div>
+              <div class="viz-cap">Reconciling four sources on a common time axis was the bulk of the work &mdash; the modeling was the easy part.</div>
+            </div>
+            <div>
+              <div class="viz-sub">AI share of scraped headlines</div>
+              <div class="colchart">
+                <div class="col slate"><span class="val">1.8%</span><div class="bar" style="height:21.7%"></div></div>
+                <div class="col"><span class="val">8.3%</span><div class="bar" style="height:100%"></div></div>
+              </div>
+              <div class="colchart-labels">
+                <div>2020<br>(start of window)</div>
+                <div>2024<br>(end of window)</div>
+              </div>
+              <div class="viz-cap">AI coverage grew 4.6&times; while layoffs ran concurrently &mdash; yet the two series correlate at only +0.11, which is why this is reported as co-occurrence.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">4</div><div class="l">Data Sources</div></div>
+          <div class="metric"><div class="n">3</div><div class="l">Data Types</div></div>
+          <div class="metric"><div class="n">+0.11</div><div class="l">Correlation</div></div>
+          <div class="metric"><div class="n">647</div><div class="l">Reddit Posts</div></div>
+        </div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">yfinance</span><span class="chip">Web Scraping</span><span class="chip">Wayback Machine</span><span class="chip">VADER</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST652" target="_blank" rel="noopener">github.com/iamjeonghwan/IST652 &#8599;</a>
+      </div>
+    </div>
+
+    <!-- ============ PROJECT 8 — IST 615 ============ -->
+    <div class="project" id="ist615">
+      <div class="p-idx"><span class="big">08</span>IST 615</div>
+      <div>
+        <div class="p-title">EastPeak Performance Group &mdash; Azure Migration</div>
+        <div class="p-sub">Azure &middot; Serverless Architecture &middot; TCO / ROI / NPV</div>
+        <p class="p-body">As technical lead I designed a two-phase serverless migration for EastPeak Performance Group and built the investor-facing financial case alongside it. The architecture and the money had to argue together &mdash; a design a CFO cannot fund is not a design.</p>
+
+        <div class="p-block"><span class="bk">Baseline</span><span class="bv">A quantified <strong>$205K / year</strong> current-state loss &mdash; the number the migration had to beat to be worth doing at all.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">A two-phase Azure serverless architecture with a phased cutover plan, paired with a full TCO, ROI, NPV, and payback model built against a <strong>$120K</strong> investment ask.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Roughly an <strong>8-month payback</strong> and a <strong>~$351K three-year NPV</strong> on the $120K ask &mdash; presented as the investor-facing case, not an engineering appendix.</span></div>
+        <div class="p-block"><span class="bk">Takeaway</span><span class="bv">The same technical decision, translated into the language of the person who has to approve it. This project is where I learned to write for a CFO audience.</span></div>
+
+        <div class="p-visual">
+          <div class="p-visual-title">Two-Phase Migration &amp; the Financial Case</div>
+          <div class="viz-2col">
+            <div>
+              <div class="viz-sub">Phased cutover</div>
+              <div class="pipeline">
+                <div class="pipe-stage">
+                  <div class="label">CURRENT</div>
+                  <div class="value">On-premise<br>state</div>
+                  <div class="note">&minus;$205K / yr</div>
+                </div>
+                <span class="pipe-arrow">&rarr;</span>
+                <div class="pipe-stage hi">
+                  <div class="label">PHASE 1</div>
+                  <div class="value">Lift core<br>workloads</div>
+                  <div class="note">Azure</div>
+                </div>
+                <span class="pipe-arrow">&rarr;</span>
+                <div class="pipe-stage out">
+                  <div class="label">PHASE 2</div>
+                  <div class="value">Serverless<br>architecture</div>
+                  <div class="note">steady state</div>
+                </div>
+              </div>
+              <div class="viz-cap">Two phases rather than one cutover, so the business absorbs the migration in tranches it can actually staff.</div>
+            </div>
+            <div>
+              <div class="viz-sub">Investor-facing case</div>
+              <div class="spec">
+                <div class="spec-row"><span class="k">Current-state loss</span><span class="v">$205K / yr</span></div>
+                <div class="spec-row"><span class="k">Investment ask</span><span class="v">$120K</span></div>
+                <div class="spec-row"><span class="k">Payback</span><span class="v">~8 months</span></div>
+                <div class="spec-row"><span class="k">3-year NPV</span><span class="v">~$351K</span></div>
+                <div class="spec-row"><span class="k">Role</span><span class="v">Technical lead</span></div>
+              </div>
+              <div class="viz-cap">The architecture was only half the deliverable; the case for funding it was the other half.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-metrics">
+          <div class="metric"><div class="n">$205K</div><div class="l">Annual Loss Quantified</div></div>
+          <div class="metric"><div class="n">~8 mo</div><div class="l">Payback Period</div></div>
+          <div class="metric"><div class="n">~$351K</div><div class="l">3-Year NPV</div></div>
+          <div class="metric"><div class="n">$120K</div><div class="l">Investment Ask</div></div>
+        </div>
+        <div class="stack"><span class="chip">Azure</span><span class="chip">Serverless</span><span class="chip">Cloud Architecture</span><span class="chip">TCO / ROI</span><span class="chip">NPV Modeling</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST615" target="_blank" rel="noopener">github.com/iamjeonghwan/IST615 &#8599;</a>
       </div>
     </div>
   </div>
