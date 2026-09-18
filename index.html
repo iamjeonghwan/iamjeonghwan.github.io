@@ -91,7 +91,7 @@
   .course-row .cv { color: var(--sub); }
 
   /* Projects */
-  .project { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 40px 0; border-top: 1px solid var(--line); }
+  .project { display: grid; grid-template-columns: 96px 1fr; gap: 26px; padding: 40px 0; border-top: 1px solid var(--line); scroll-margin-top: 76px; }
   .project:first-of-type { border-top: none; padding-top: 0; }
   @media (max-width: 640px){ .project{ grid-template-columns:1fr; gap:12px; } }
   .p-idx { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); }
@@ -237,6 +237,7 @@
   <div class="wrap">
     <div class="brand">JEONGHWAN <b>SON</b></div>
     <div class="navlinks">
+      <a href="#bio">bio</a>
       <a href="#about">about</a>
       <a href="#education">education</a>
       <a href="#work">work</a>
@@ -257,6 +258,14 @@
     </div>
   </div>
 </header>
+
+<section id="bio">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">00</span><span class="sec-title">Bio</span></div>
+    <p class="lede" style="max-width:720px;">I started my career on the fab floor, not in a notebook. Years spent running wafer test protocols and troubleshooting components on Advantest, Teradyne, and Accretech platforms taught me to read a sensor reading the way an engineer reads a datasheet &mdash; as a signal with a physical cause, not just a number in a column. That instinct is what pulled me toward data science: I wanted the statistical and machine-learning training to test those signals as rigorously as I once diagnosed hardware.</p>
+    <p class="lede" style="max-width:720px;">At Syracuse University, I've built that rigor around the same instincts &mdash; treating a defect map from a wafer line and a customer-ratings table from an OLTP system as the same kind of problem: extract the signal, respect the physics or process context behind it, and stay honest about what a model can and can't claim. I'm now looking for a Data Scientist / Data Engineer role where that combination of hardware fluency and data-science discipline is an asset, ideally in a semiconductor or industrial data setting.</p>
+  </div>
+</section>
 
 <section id="about">
   <div class="wrap">
@@ -326,7 +335,7 @@
     <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Projects</span></div>
 
     <!-- ============ PROJECT 1 — IST 722 ============ -->
-    <div class="project">
+    <div class="project" id="ist722">
       <div class="p-idx"><span class="big">01</span>IST 722</div>
       <div>
         <div class="p-title">Fudgemart, Inc. DW/BI Initiative &mdash; Customer Ratings Integration</div>
@@ -389,7 +398,7 @@
     </div>
 
     <!-- ============ PROJECT 2 — IST 707 ============ -->
-    <div class="project">
+    <div class="project" id="ist707">
       <div class="p-idx"><span class="big">02</span>IST 707</div>
       <div>
         <div class="p-title">Semiconductor Wafer Defect Prediction &mdash; EF-PIPELINE v3.1</div>
@@ -460,7 +469,7 @@
     </div>
 
     <!-- ============ PROJECT 3 — IST 664 ============ -->
-    <div class="project">
+    <div class="project" id="ist664">
       <div class="p-idx"><span class="big">03</span>IST 664</div>
       <div>
         <div class="p-title">Support Ticket Categorization &amp; Dataset Quality Diagnosis</div>
