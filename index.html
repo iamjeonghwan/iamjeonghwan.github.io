@@ -275,7 +275,7 @@
       <div>
         <p>My focus is <strong>scalable ELT data warehouse design</strong>, <strong>feature-engineering workflows</strong>, and <strong>predictive machine learning models</strong>. A defect map from a wafer line and a customer-ratings table from an OLTP system are both signal problems &mdash; but semiconductor data carries physics, process context, and failure modes that a generic pipeline misses.</p>
         <ul class="summary-list">
-          <li><b>Predictive modeling</b>Built an end-to-end semiconductor defect prediction pipeline (SECOM EF-PIPELINE v3.1) using autoencoder feature extraction and ensemble trees, reaching a 0.98 Test AUC under cross-validation in isolating high-risk wafers.</li>
+          <li><b>Predictive modeling</b>Built an end-to-end semiconductor defect prediction pipeline (SECOM EF-PIPELINE v3.0) using autoencoder feature extraction and a soft-voting tree ensemble, reaching a 0.796 test AUC on a 6.6%-positive target with every preparation statistic fitted on the training partition only.</li>
           <li><b>Data warehouse integration</b>Modeled and validated 2,972 conformed records on Snowflake via automated dbt models, unifying data across two subsidiaries.</li>
           <li><b>NLP classification &amp; diagnostics</b>Constructed a 10-fold cross-validation text-classification pipeline, using statistical diagnostic tools (Zipf's Law) to analyze dataset quality and evaluate metadata-augmented feature models.</li>
         </ul>
@@ -403,69 +403,71 @@
     <div class="project" id="ist707">
       <div class="p-idx"><span class="big">02</span>IST 707</div>
       <div>
-        <div class="p-title">Semiconductor Wafer Defect Prediction &mdash; EF-PIPELINE v3.1</div>
-        <div class="p-sub">Autoencoder Feature Extraction &middot; Ensemble Trees &middot; SHAP</div>
+        <div class="p-title">Semiconductor Wafer Defect Prediction &mdash; EF-PIPELINE v3.0</div>
+        <div class="p-sub">Autoencoder Feature Extraction &middot; Ensemble Trees &middot; Threshold Tuning</div>
         <p class="p-body">Semiconductor fabrication generates highly collinear sensor readings where subtle tool deviations cause compound yield drops. Rule-based single-variable alerts miss non-linear multivariate interactions, so I built a leakage-safe pipeline that compresses the inline parameter grid and learns those interactions directly.</p>
 
-        <div class="p-block"><span class="bk">Data</span><span class="bv">SECOM dataset (UCI ML Repository): <strong>1,567 wafers</strong> across <strong>591 continuous inline tool parameters</strong> with heavy class imbalance.</span></div>
-        <div class="p-block"><span class="bk">Approach</span><span class="bv">Python, Scikit-Learn, CatBoost, XGBoost, Neural Network Autoencoders (MLPRegressor), RobustScaler, SHAP.</span></div>
-        <div class="p-block"><span class="bk">Results</span><span class="bv">Prevented data leakage by fitting preparation statistics inside train folds only; removed &gt;15% missing and constant parameters and applied a Pearson correlation filter (|r|&nbsp;&gt;&nbsp;0.8). Autoencoders compressed the high-dimensional grid into a latent space, and an optimized Random Forest reached a <strong>0.98 Test AUC</strong> (0.94 accuracy, 0.91 recall) under cross-validation. SHAP identified Viscosity, Reaction Temperature, and Mixing Time as leading failure drivers.</span></div>
-        <div class="p-block"><span class="bk">Next</span><span class="bv">Gained experience handling sparse classes and safe scaling. Next: embed the pipeline into a stream-based early-warning engine.</span></div>
+        <div class="p-block"><span class="bk">Data</span><span class="bv">SECOM dataset (UCI ML Repository): <strong>1,567 wafers</strong> across <strong>590 anonymized inline tool parameters</strong>, with only <strong>104 failures (6.6%)</strong> &mdash; severe class imbalance and heavy missingness.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Python, Scikit-Learn, CatBoost, XGBoost, <code>BalancedRandomForestClassifier</code>, neural-network autoencoder (MLPRegressor), RobustScaler, target encoding, and a weighted soft-voting ensemble.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Narrowed 590 raw parameters to <strong>247</strong> through missing-rate, constant, and Pearson (|r|&nbsp;&gt;&nbsp;0.8) filters, then fed <strong>282 features</strong> to the models (247 filtered + 3 target-encoded + 32 autoencoder latent). The soft-voting ensemble reached a <strong>0.796 test AUC</strong> &mdash; Balanced Random Forest 0.794, CatBoost 0.743, XGBoost 0.733 &mdash; with the decision threshold tuned on the validation PR curve. An earlier iteration of the same ensemble peaked at 0.808.</span></div>
+        <div class="p-block"><span class="bk">Method note</span><span class="bv">Evaluated on a <strong>single stratified split</strong> (939 train / 314 validation / 314 test, seed 42), not cross-validation. Every preparation statistic &mdash; scaler, target encoder, autoencoder &mdash; was fitted on the training partition only, so the test AUC carries no leakage.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Gained experience handling sparse classes and safe scaling. Next: add cross-validated confidence intervals and per-feature attribution, then embed the pipeline into a stream-based early-warning engine.</span></div>
 
         <div class="p-visual">
-          <div class="p-visual-title">EF-PIPELINE v3.1 &amp; Top Defect Drivers via SHAP</div>
-          <div class="viz-sub">Leakage-safe pipeline (all statistics fit inside train folds)</div>
+          <div class="p-visual-title">EF-PIPELINE v3.0 &mdash; Feature Funnel &amp; Model Comparison</div>
+          <div class="viz-sub">Leakage-safe pipeline (all statistics fit on the training partition only)</div>
           <div class="pipeline">
             <div class="pipe-stage">
               <div class="label">RAW</div>
-              <div class="value">591 params</div>
+              <div class="value">590 params</div>
               <div class="note">1,567 wafers</div>
             </div>
             <span class="pipe-arrow">&rarr;</span>
             <div class="pipe-stage">
               <div class="label">CLEAN</div>
               <div class="value">Drop &gt;15% missing<br>&amp; constant</div>
+              <div class="note">&rarr; 964</div>
             </div>
             <span class="pipe-arrow">&rarr;</span>
             <div class="pipe-stage">
               <div class="label">DECORRELATE</div>
               <div class="value">Pearson filter</div>
-              <div class="note">|r| &gt; 0.8</div>
+              <div class="note">|r| &gt; 0.8 &rarr; 247</div>
             </div>
             <span class="pipe-arrow">&rarr;</span>
             <div class="pipe-stage hi">
               <div class="label">COMPRESS</div>
-              <div class="value">Autoencoder<br>latent space</div>
-              <div class="note">MLPRegressor</div>
+              <div class="value">Autoencoder<br>latent block</div>
+              <div class="note">+32 features</div>
             </div>
             <span class="pipe-arrow">&rarr;</span>
             <div class="pipe-stage out">
               <div class="label">PREDICT</div>
-              <div class="value">Optimized RF</div>
-              <div class="note">AUC 0.98</div>
+              <div class="value">Soft-vote<br>ensemble</div>
+              <div class="note">AUC 0.796</div>
             </div>
           </div>
 
           <div style="margin-top:26px;">
-            <div class="viz-sub">Mean |SHAP value| &mdash; impact on defect probability</div>
+            <div class="viz-sub">Test ROC AUC by model (single stratified split)</div>
             <div class="hbars">
-              <div class="hbar"><span class="label">Reaction Temp</span><div class="track"><div class="bar" style="width:84%"></div></div><span class="count">0.42</span></div>
-              <div class="hbar"><span class="label">Mixing Time</span><div class="track"><div class="bar" style="width:76%"></div></div><span class="count">0.38</span></div>
-              <div class="hbar"><span class="label">Viscosity</span><div class="track"><div class="bar" style="width:62%"></div></div><span class="count">0.31</span></div>
-              <div class="hbar dim"><span class="label">Sensor_421</span><div class="track"><div class="bar" style="width:36%"></div></div><span class="count">0.18</span></div>
-              <div class="hbar dim"><span class="label">Sensor_108</span><div class="track"><div class="bar" style="width:24%"></div></div><span class="count">0.12</span></div>
+              <div class="hbar"><span class="label">Soft-vote ens.</span><div class="track"><div class="bar" style="width:79.6%"></div></div><span class="count">0.796</span></div>
+              <div class="hbar"><span class="label">Balanced RF</span><div class="track"><div class="bar" style="width:79.4%"></div></div><span class="count">0.794</span></div>
+              <div class="hbar dim"><span class="label">CatBoost</span><div class="track"><div class="bar" style="width:74.3%"></div></div><span class="count">0.743</span></div>
+              <div class="hbar dim"><span class="label">XGBoost</span><div class="track"><div class="bar" style="width:73.3%"></div></div><span class="count">0.733</span></div>
             </div>
-            <div class="viz-cap">Process-physics variables dominate raw sensor channels &mdash; the model's drivers are interpretable to a process engineer.</div>
+            <div class="chance-note">Random baseline = 0.500 on a 6.6%-positive target</div>
+            <div class="viz-cap">On SECOM &mdash; 590 anonymized parameters, 6.6% failures &mdash; an AUC near 0.80 is the realistic ceiling for this feature set. The ensemble's gain over Balanced Random Forest alone is marginal, which is itself the honest finding.</div>
           </div>
         </div>
 
         <div class="p-metrics">
-          <div class="metric"><div class="n">0.98</div><div class="l">Test AUC (CV)</div></div>
-          <div class="metric"><div class="n">0.94</div><div class="l">Accuracy</div></div>
-          <div class="metric"><div class="n">0.91</div><div class="l">Recall</div></div>
-          <div class="metric"><div class="n">591</div><div class="l">Inline Parameters</div></div>
+          <div class="metric"><div class="n">0.796</div><div class="l">Test AUC (Ensemble)</div></div>
+          <div class="metric"><div class="n">6.6%</div><div class="l">Failure Rate (104 / 1,567)</div></div>
+          <div class="metric"><div class="n">590 &rarr; 247</div><div class="l">Parameters After Filtering</div></div>
+          <div class="metric"><div class="n">282</div><div class="l">Features Fed to Models</div></div>
         </div>
-        <div class="stack"><span class="chip">Python</span><span class="chip">Scikit-Learn</span><span class="chip">CatBoost</span><span class="chip">XGBoost</span><span class="chip">Autoencoder</span><span class="chip">RobustScaler</span><span class="chip">SMOTE</span><span class="chip">SHAP</span></div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">Scikit-Learn</span><span class="chip">CatBoost</span><span class="chip">XGBoost</span><span class="chip">Balanced Random Forest</span><span class="chip">Autoencoder</span><span class="chip">RobustScaler</span><span class="chip">Soft-Voting Ensemble</span></div>
         <a class="repo" href="https://github.com/iamjeonghwan/IST707" target="_blank" rel="noopener">github.com/iamjeonghwan/IST707 &#8599;</a>
       </div>
     </div>
@@ -475,14 +477,14 @@
       <div class="p-idx"><span class="big">03</span>IST 691</div>
       <div>
         <div class="p-title">PCB Defect Detection &amp; Segmentation</div>
-        <div class="p-sub">YOLOv8 &middot; U-Net &middot; TensorFlow / Keras &middot; OpenCV</div>
-        <p class="p-body">Manual inspection of printed circuit boards is slow and inconsistent. I chained two models instead of asking one to do both jobs: a YOLOv8 detector locates each defect, then a U-Net delineates it at pixel level &mdash; detection for triage, segmentation for measurement.</p>
+        <div class="p-sub">YOLOv8s (PyTorch / Ultralytics) &middot; U-Net (TensorFlow / Keras) &middot; OpenCV</div>
+        <p class="p-body">Manual inspection of printed circuit boards is slow and inconsistent. I chained two models instead of asking one to do both jobs: a YOLOv8s detector locates each defect, then a U-Net delineates it at pixel level &mdash; detection for triage, segmentation for measurement.</p>
 
-        <div class="p-block"><span class="bk">Data</span><span class="bv">PCB defect imagery evaluated on <strong>139 test images</strong> carrying <strong>601 labeled instances</strong> across six defect classes.</span></div>
-        <div class="p-block"><span class="bk">Approach</span><span class="bv">Stage 1: YOLOv8 bounding-box detection. Stage 2: regions of interest cropped from the detector output and passed to a Dice-loss-trained U-Net for pixel-level masks. TensorFlow / Keras and OpenCV.</span></div>
-        <div class="p-block"><span class="bk">Results</span><span class="bv">Detection reached <strong>0.971 mAP@50</strong> with precision and recall both at 0.966. Segmentation reached <strong>0.939 mean Dice</strong>, 0.892 mean IoU, and a 0.939 best-threshold F1.</span></div>
-        <div class="p-block"><span class="bk">Limit</span><span class="bv">The segmentation masks were heuristically auto-generated from YOLO crops rather than hand-annotated. The Dice score therefore validates pipeline mechanics, not ground truth &mdash; stated here rather than buried in an appendix.</span></div>
-        <div class="p-block"><span class="bk">Next</span><span class="bv">Replace the auto-masks with manual ground-truth annotation to test the assumption the Dice score rests on.</span></div>
+        <div class="p-block"><span class="bk">Data</span><span class="bv">Kaggle <code>akhatova/pcb-defects</code> across six defect classes. Detection was validated on the <strong>139-image validation split</strong> carrying <strong>601 labeled instances</strong>; the U-Net was trained on 294 ROI crops split 205 / 58 / <strong>31 test</strong>.</span></div>
+        <div class="p-block"><span class="bk">Approach</span><span class="bv">Stage 1: YOLOv8s at 1024&nbsp;px, batch 8, Adam (lr 1e-3), 100 epochs with mosaic and mixup augmentation. Stage 2: detector crops converted to pseudo-masks (grayscale &rarr; Gaussian blur &rarr; Otsu inverse &rarr; morphological open/close) and passed to a 256&times;256 Dice-loss U-Net trained for 20 epochs.</span></div>
+        <div class="p-block"><span class="bk">Results</span><span class="bv">Detection reached <strong>0.971 mAP@50</strong> with precision and recall both at 0.966 &mdash; but <strong>mAP@50-95 of only 0.540</strong>, so boxes are found reliably while tight localization is far weaker. Segmentation on the 31-crop test set reached <strong>0.939 mean Dice</strong>, 0.892 mean IoU, 0.954 precision, and 0.935 recall at a 0.50 threshold.</span></div>
+        <div class="p-block"><span class="bk">Limit</span><span class="bv">The segmentation masks were heuristically auto-generated from YOLO crops rather than hand-annotated, and the test set is only 31 crops. The Dice score therefore validates pipeline mechanics, not ground truth &mdash; stated here rather than buried in an appendix.</span></div>
+        <div class="p-block"><span class="bk">Next</span><span class="bv">Replace the auto-masks with manual ground-truth annotation on a larger test set, and treat mAP@50-95 rather than mAP@50 as the headline detection metric.</span></div>
 
         <div class="p-visual">
           <div class="p-visual-title">Two-Stage Vision Pipeline &amp; Evaluation Scores</div>
@@ -520,22 +522,23 @@
                 <div class="hbar"><span class="label">mAP@50</span><div class="track"><div class="bar" style="width:97.1%"></div></div><span class="count">0.971</span></div>
                 <div class="hbar"><span class="label">Precision</span><div class="track"><div class="bar" style="width:96.6%"></div></div><span class="count">0.966</span></div>
                 <div class="hbar"><span class="label">Recall</span><div class="track"><div class="bar" style="width:96.6%"></div></div><span class="count">0.966</span></div>
+                <div class="hbar"><span class="label">mAP@50-95</span><div class="track"><div class="bar" style="width:54.0%"></div></div><span class="count">0.540</span></div>
                 <div class="hbar dim"><span class="label">Mean Dice</span><div class="track"><div class="bar" style="width:93.9%"></div></div><span class="count">0.939</span></div>
-                <div class="hbar dim"><span class="label">Best-thr. F1</span><div class="track"><div class="bar" style="width:93.9%"></div></div><span class="count">0.939</span></div>
                 <div class="hbar dim"><span class="label">Mean IoU</span><div class="track"><div class="bar" style="width:89.2%"></div></div><span class="count">0.892</span></div>
               </div>
-              <div class="viz-cap">Navy bars are detection (Stage 1); grey bars are segmentation (Stage 2), whose ceiling is set by the auto-generated masks noted above.</div>
+              <div class="viz-cap">Navy bars are detection (Stage 1); grey bars are segmentation (Stage 2). The mAP@50-95 bar is the one that matters most honestly &mdash; at stricter IoU thresholds the detector loses roughly half its score.</div>
             </div>
           </div>
         </div>
 
         <div class="p-metrics">
           <div class="metric"><div class="n">0.971</div><div class="l">mAP@50 (Detection)</div></div>
+          <div class="metric"><div class="n">0.540</div><div class="l">mAP@50-95 (Detection)</div></div>
           <div class="metric"><div class="n">0.939</div><div class="l">Mean Dice (Segmentation)</div></div>
-          <div class="metric"><div class="n">601</div><div class="l">Labeled Instances</div></div>
-          <div class="metric"><div class="n">6</div><div class="l">Defect Classes</div></div>
+          <div class="metric"><div class="n">601</div><div class="l">Labeled Instances (Val)</div></div>
         </div>
-        <div class="stack"><span class="chip">Python</span><span class="chip">YOLOv8</span><span class="chip">U-Net</span><span class="chip">TensorFlow / Keras</span><span class="chip">OpenCV</span><span class="chip">Dice Loss</span></div>
+        <div class="stack"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">Ultralytics YOLOv8</span><span class="chip">U-Net</span><span class="chip">TensorFlow / Keras</span><span class="chip">OpenCV</span><span class="chip">Dice Loss</span><span class="chip">Otsu Thresholding</span></div>
+        <a class="repo" href="https://github.com/iamjeonghwan/IST691" target="_blank" rel="noopener">github.com/iamjeonghwan/IST691 &#8599;</a>
       </div>
     </div>
 
